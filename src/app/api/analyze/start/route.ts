@@ -19,7 +19,6 @@ export async function POST(req: NextRequest) {
     if (!videoBucket) {
       const { error: bucketError } = await supabase.storage.createBucket('videos', {
         public: true,
-        fileSizeLimit: 524288000, // 500MB
       });
       if (bucketError && !bucketError.message.includes('already exists')) {
         console.error('버킷 생성 실패:', bucketError);
