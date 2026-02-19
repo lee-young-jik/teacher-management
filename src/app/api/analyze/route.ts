@@ -3,10 +3,7 @@ import OpenAI from 'openai';
 import { AssemblyAI } from 'assemblyai';
 import fs from 'fs/promises';
 import path from 'path';
-import { exec } from 'child_process';
-import { promisify } from 'util';
 import { writeFile } from 'fs/promises';
-import { Readable } from 'stream';
 import { createClient } from '@supabase/supabase-js';
 import os from 'os';
 
@@ -14,23 +11,6 @@ import os from 'os';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
-const execAsync = promisify(exec);
-
-// FFmpeg 경로 설정 - Vercel/로컬 환경 모두 지원
-let FFMPEG_PATH = 'ffmpeg';
-try {
-  // @ffmpeg-installer/ffmpeg가 설치되어 있으면 해당 경로 사용
-  const ffmpegInstaller = require('@ffmpeg-installer/ffmpeg');
-  FFMPEG_PATH = ffmpegInstaller.path;
-  console.log('📦 FFmpeg 경로:', FFMPEG_PATH);
-} catch (e) {
-  // 설치되어 있지 않으면 시스템 FFmpeg 사용
-  FFMPEG_PATH = process.platform === 'win32' 
-    ? 'C:\\Program Files\\ffmpeg\\bin\\ffmpeg.exe'
-    : 'ffmpeg';
-  console.log('🔧 시스템 FFmpeg 사용:', FFMPEG_PATH);
-}
 
 // Vercel 환경 감지 - /tmp 사용 여부 결정
 const IS_VERCEL = process.env.VERCEL === '1';
@@ -321,39 +301,22 @@ export async function POST(req: NextRequest) {
     await fs.mkdir(reportDir, { recursive: true });
 
     try {
-      // 비디오 파일을 메모리에서만 처리 (저장하지 않음)
+      // 비디오 파일을 메모리에서 처리
       const videoBuffer = Buffer.from(await video.arrayBuffer());
-      const audioPath = path.join(reportDir, 'audio.mp3');
-      // 임시 비디오 파일 경로 (오디오 추출용)
-      const tempVideoPath = path.join(reportDir, 'temp_video.mp4');
       
       console.log(`📹 영상 파일 처리 중: ${video.name} (${(video.size / 1024 / 1024).toFixed(2)}MB)`);
       
       // 상태 업데이트
       statusEmitter.get(reportId)?.('{"status":"uploading","progress":30,"step":"비디오 파일 처리 완료"}');
 
-      // FFmpeg를 사용하여 비디오에서 오디오 추출
-      try {
-        // 임시 비디오 파일 생성 (오디오 추출 후 삭제)
-        await writeFile(tempVideoPath, videoBuffer);
-        
-        const ffmpegCommand = `"${FFMPEG_PATH}" -i "${tempVideoPath}" -vn -acodec libmp3lame -q:a 2 "${audioPath}"`;
-        console.log('FFmpeg 명령어:', ffmpegCommand);
-        
-        const { stdout, stderr } = await execAsync(ffmpegCommand);
-        console.log('FFmpeg 출력:', stdout);
-        if (stderr) console.error('FFmpeg 오류:', stderr);
-        
-        statusEmitter.get(reportId)?.('{"status":"processing","progress":50,"step":"오디오 추출 완료"}');
-      } catch (error) {
-        console.error('오디오 추출 오류:', error);
-        throw new Error(`오디오 추출에 실패했습니다: ${error instanceof Error ? error.message : '알 수 없는 오류'}`);
-      }
-
-      // 오디오 파일을 읽어서 AssemblyAI로 전송
-      const audioBuffer = await fs.readFile(audioPath);
-      const uploadResponse = await assemblyai.files.upload(audioBuffer);
-      statusEmitter.get(reportId)?.('{"status":"processing","progress":70,"step":"오디오 파일 업로드 완료"}');
+      // AssemblyAI는 비디오 파일을 직접 지원! (FFmpeg 불필요)
+      // 비디오를 직접 업로드하면 AssemblyAI가 자동으로 오디오 추출
+      console.log('📤 AssemblyAI에 비디오 직접 업로드 중...');
+      statusEmitter.get(reportId)?.('{"status":"processing","progress":50,"step":"AssemblyAI 업로드 중"}');
+      
+      const uploadResponse = await assemblyai.files.upload(videoBuffer);
+      console.log('✅ AssemblyAI 업로드 완료:', uploadResponse);
+      statusEmitter.get(reportId)?.('{"status":"processing","progress":70,"step":"비디오 업로드 완료"}');
       
       // 트랜스크립션 시작 (영어 원문 추출)
       const transcript = await assemblyai.transcripts.transcribe({
@@ -659,12 +622,6 @@ ${transcript.utterances?.slice(0, 20).map((msg, idx) =>
         }
       }
 
-      // 임시 파일 정리
-      await Promise.all([
-        fs.unlink(tempVideoPath).catch(e => console.error('임시 비디오 파일 삭제 실패:', e)),
-        fs.unlink(audioPath).catch(e => console.error('오디오 파일 삭제 실패:', e))
-      ]);
-
       // 응답에 reportId 포함
       const response = {
         status: 'completed',
@@ -675,15 +632,7 @@ ${transcript.utterances?.slice(0, 20).map((msg, idx) =>
       return NextResponse.json(response);
 
     } catch (error) {
-      // 오류 발생 시 임시 파일 정리
-      const tempVideoPath = path.join(reportDir, 'temp_video.mp4');
-      const audioPath = path.join(reportDir, 'audio.mp3');
-      
-      await Promise.all([
-        fs.unlink(tempVideoPath).catch(() => {}),
-        fs.unlink(audioPath).catch(() => {})
-      ]);
-
+      // 오류를 상위로 전파
       throw error;
     }
 

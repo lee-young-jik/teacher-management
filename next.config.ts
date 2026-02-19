@@ -13,8 +13,6 @@ const nextConfig: NextConfig = {
       bodySizeLimit: '100mb',
     },
   },
-  // FFmpeg 패키지를 외부로 처리
-  serverExternalPackages: ['@ffmpeg-installer/ffmpeg', 'fluent-ffmpeg'],
 };
 
 export default nextConfig;
