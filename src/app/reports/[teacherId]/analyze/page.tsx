@@ -72,61 +72,122 @@ export default function AnalyzePage() {
   const handleUpload = async () => {
     if (!selectedFile) return;
     setUploading(true);
+    setError(null);
+    setStatusMessage(null);
     
     try {
-      const formData = new FormData();
-      formData.append('video', selectedFile);
-      formData.append('teacherId', teacherId); // teacherId가 실제로는 선생님 이름
-
-      // 분석 시작
-      const response = await fetch('/api/analyze', {
+      // 1단계: 업로드 초기화
+      setUploadProgress(5);
+      setStatusMessage('업로드 초기화 중...');
+      
+      const startRes = await fetch('/api/analyze/start', {
         method: 'POST',
-        body: formData
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fileName: selectedFile.name,
+          teacherId: teacherId,
+          title: selectedFile.name.replace(/\.[^/.]+$/, ""),
+          lessonDate: new Date().toISOString().split('T')[0],
+          fileSize: selectedFile.size,
+        }),
       });
 
-      const data = await response.json();
-      
-      if (data.transcriptId) {
-        setTranscriptId(data.transcriptId);
-        checkStatus(data.transcriptId);
+      if (!startRes.ok) {
+        const err = await startRes.json();
+        throw new Error(err.error || '초기화 실패');
       }
+
+      const { reportId, videoPath, token } = await startRes.json();
+
+      // 2단계: Supabase Storage에 영상 업로드
+      setUploadProgress(10);
+      setStatusMessage('영상 업로드 중...');
+      
+      const { createClient } = await import('@supabase/supabase-js');
+      const supabaseClient = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+      );
+
+      const { error: uploadError } = await supabaseClient.storage
+        .from('videos')
+        .uploadToSignedUrl(videoPath, token, selectedFile, { upsert: true });
+
+      if (uploadError) throw new Error(`영상 업로드 실패: ${uploadError.message}`);
+
+      setUploadProgress(30);
+
+      // 3단계: 트랜스크립션 시작
+      setStatusMessage('음성 인식 시작 중...');
+      
+      const transcribeRes = await fetch('/api/analyze/transcribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ videoPath, reportId }),
+      });
+
+      if (!transcribeRes.ok) {
+        const err = await transcribeRes.json();
+        throw new Error(err.error || '트랜스크립션 시작 실패');
+      }
+
+      const { transcriptId: tId } = await transcribeRes.json();
+      setTranscriptId(tId);
+      setUploadProgress(40);
+
+      // 4단계: 트랜스크립션 완료 대기 (폴링)
+      setStatusMessage('음성 인식 처리 중...');
+      
+      let transcriptStatus = 'processing';
+      while (transcriptStatus !== 'completed' && transcriptStatus !== 'error') {
+        await new Promise(r => setTimeout(r, 3000));
+        
+        const statusRes = await fetch(`/api/analyze/status?transcriptId=${tId}`);
+        const statusData = await statusRes.json();
+        
+        transcriptStatus = statusData.status;
+        setUploadProgress(Math.min(statusData.progress || 40, 65));
+        if (statusData.step) setStatusMessage(statusData.step);
+        
+        if (transcriptStatus === 'error') {
+          throw new Error(statusData.error || '음성 인식 중 오류');
+        }
+      }
+
+      // 5단계: GPT 분석
+      setUploadProgress(70);
+      setStatusMessage('AI 분석 중...');
+      
+      const completeRes = await fetch('/api/analyze/complete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          transcriptId: tId,
+          reportId,
+          teacherId: teacherId,
+          title: selectedFile.name.replace(/\.[^/.]+$/, ""),
+          lessonDate: new Date().toISOString().split('T')[0],
+          fileName: selectedFile.name,
+          fileSize: selectedFile.size,
+        }),
+      });
+
+      if (!completeRes.ok) {
+        const err = await completeRes.json();
+        throw new Error(err.error || 'AI 분석 실패');
+      }
+
+      setUploadProgress(100);
+      setStatusMessage('분석 완료!');
+      
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      router.push(`/reports/${teacherId}/${reportId}`);
+
     } catch (error) {
       console.error('업로드 오류:', error);
+      setError(error instanceof Error ? error.message : '분석 중 오류가 발생했습니다.');
       setUploading(false);
     }
-  };
-
-  const checkStatus = async (id: string) => {
-    const interval = setInterval(async () => {
-      try {
-        const response = await fetch(`/api/analyze-status?transcriptId=${id}&teacherId=${teacherId}`);
-        const data = await response.json();
-        
-        setUploadProgress(data.progress);
-        
-        if (data.step) {
-          setStatusMessage(data.step);
-        }
-
-        if (data.status === 'completed' && data.reportId) {
-          clearInterval(interval);
-          console.log('분석 완료. 이동할 reportId:', data.reportId);
-          await new Promise(resolve => setTimeout(resolve, 1000));
-          router.push(`/reports/${teacherId}/${data.reportId}`);
-        } else if (data.status === 'error') {
-          clearInterval(interval);
-          setUploading(false);
-          setError('분석 중 오류가 발생했습니다.');
-        }
-      } catch (error) {
-        console.error('상태 확인 오류:', error);
-        clearInterval(interval);
-        setUploading(false);
-        setError('상태 확인 중 오류가 발생했습니다.');
-      }
-    }, 3000);
-
-    return () => clearInterval(interval);
   };
 
   return (

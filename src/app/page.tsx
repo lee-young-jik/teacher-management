@@ -442,90 +442,147 @@ export default function TeacherDashboard() {
     setUploading(true);
     setUploadProgress(0);
 
-    let currentProgress = 0;
-    const simulateProgress = (target: number, duration: number) => {
-      return new Promise<void>((resolve) => {
-        const startProgress = currentProgress;
-        const startTime = Date.now();
-        
-        const animate = () => {
-          const elapsed = Date.now() - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          const eased = 1 - (1 - progress) * (1 - progress);
-          currentProgress = startProgress + (target - startProgress) * eased;
-          setUploadProgress(Math.round(currentProgress));
-          
-          if (progress < 1) {
-            requestAnimationFrame(animate);
-          } else {
-            resolve();
-          }
-        };
-        requestAnimationFrame(animate);
-      });
-    };
+    const teacherName = profile?.full_name || 'Unknown Teacher';
+    const finalTitle = lessonTitle.trim() || selectedFile.name.replace(/\.[^/.]+$/, "");
 
     try {
-      const finalTitle = lessonTitle.trim() || selectedFile.name.replace(/\.[^/.]+$/, "");
+      // ===== 1단계: 서버에서 업로드 URL 받기 =====
+      setUploadProgress(5);
+      console.log('📋 1단계: 업로드 초기화...');
       
-      simulateProgress(15, 800);
-      
-      const formData = new FormData();
-      formData.append('video', selectedFile);
-      formData.append('teacherId', profile?.full_name || 'Unknown Teacher');
-      formData.append('title', finalTitle);
-      formData.append('lessonDate', lessonDate);
-
-      await simulateProgress(35, 1200);
-
-      const responsePromise = fetch('/api/analyze', {
+      const startRes = await fetch('/api/analyze/start', {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fileName: selectedFile.name,
+          teacherId: teacherName,
+          title: finalTitle,
+          lessonDate,
+          fileSize: selectedFile.size,
+        }),
       });
 
-      simulateProgress(85, 60000);
+      if (!startRes.ok) {
+        const err = await startRes.json();
+        throw new Error(err.error || '초기화 실패');
+      }
 
-      const response = await responsePromise;
+      const { reportId, videoPath, token } = await startRes.json();
+      console.log('✅ 1단계 완료:', { reportId, videoPath });
 
-      if (!response.ok) {
-        try {
-          const errorData = await response.json();
-          throw new Error(errorData.error || '업로드 실패');
-        } catch (parseError) {
-          throw new Error(`업로드 실패 (HTTP ${response.status})`);
+      // ===== 2단계: Supabase Storage에 영상 직접 업로드 =====
+      setUploadProgress(10);
+      console.log('📤 2단계: 영상 업로드 중... (Supabase Storage)');
+      
+      // Supabase 클라이언트로 서명된 URL에 업로드
+      const { createClient } = await import('@supabase/supabase-js');
+      const supabaseClient = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+      );
+
+      const { error: uploadError } = await supabaseClient.storage
+        .from('videos')
+        .uploadToSignedUrl(videoPath, token, selectedFile, {
+          upsert: true,
+        });
+
+      if (uploadError) {
+        throw new Error(`영상 업로드 실패: ${uploadError.message}`);
+      }
+      
+      setUploadProgress(30);
+      console.log('✅ 2단계 완료: 영상 업로드 성공');
+
+      // ===== 3단계: 트랜스크립션 시작 =====
+      console.log('🎙️ 3단계: 음성 인식 시작...');
+      
+      const transcribeRes = await fetch('/api/analyze/transcribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ videoPath, reportId }),
+      });
+
+      if (!transcribeRes.ok) {
+        const err = await transcribeRes.json();
+        throw new Error(err.error || '트랜스크립션 시작 실패');
+      }
+
+      const { transcriptId } = await transcribeRes.json();
+      setUploadProgress(40);
+      console.log('✅ 3단계 완료:', { transcriptId });
+
+      // ===== 4단계: 트랜스크립션 완료 대기 (폴링) =====
+      console.log('⏳ 4단계: 음성 인식 대기 중...');
+      
+      let transcriptStatus = 'processing';
+      while (transcriptStatus !== 'completed' && transcriptStatus !== 'error') {
+        await new Promise(r => setTimeout(r, 3000)); // 3초마다 확인
+        
+        const statusRes = await fetch(`/api/analyze/status?transcriptId=${transcriptId}`);
+        const statusData = await statusRes.json();
+        
+        transcriptStatus = statusData.status;
+        const progress = Math.min(statusData.progress || 40, 65);
+        setUploadProgress(progress);
+        
+        console.log(`📊 상태: ${transcriptStatus} (${progress}%)`);
+        
+        if (transcriptStatus === 'error') {
+          throw new Error(statusData.error || '음성 인식 중 오류가 발생했습니다.');
         }
       }
 
-      const result = await response.json();
-      
-      await simulateProgress(95, 500);
+      console.log('✅ 4단계 완료: 음성 인식 완료');
 
-      // Supabase에서 최신 데이터 다시 로드
-      const refreshReports = async () => {
-        try {
-          const response = await fetch(`/api/reports/teacher/${encodeURIComponent(profile?.full_name || '')}`);
-          const result = await response.json();
-          
-          if (result.success && result.data) {
-            const formattedLessons = result.data.map((report: any, index: number) => ({
-              id: index + 1,
-              title: report.title || '제목 없음',
-              date: new Date(report.created_at).toISOString().split('T')[0],
-              status: 'completed',
-              score: report.total_score || 0,
-              duration: report.video_duration || '-',
-              reportId: report.report_id
-            }));
-            setLessons(formattedLessons);
-          }
-        } catch (error) {
-          console.error('Failed to refresh reports:', error);
+      // ===== 5단계: GPT 분석 실행 =====
+      setUploadProgress(70);
+      console.log('🤖 5단계: AI 분석 중...');
+      
+      const completeRes = await fetch('/api/analyze/complete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          transcriptId,
+          reportId,
+          teacherId: teacherName,
+          title: finalTitle,
+          lessonDate,
+          fileName: selectedFile.name,
+          fileSize: selectedFile.size,
+        }),
+      });
+
+      if (!completeRes.ok) {
+        const err = await completeRes.json();
+        throw new Error(err.error || 'AI 분석 실패');
+      }
+
+      setUploadProgress(95);
+      console.log('✅ 5단계 완료: 분석 완료!');
+
+      // ===== 6단계: 결과 새로고침 =====
+      try {
+        const reportsRes = await fetch(`/api/reports/teacher/${encodeURIComponent(teacherName)}`);
+        const reportsData = await reportsRes.json();
+        
+        if (reportsData.success && reportsData.data) {
+          const formattedLessons = reportsData.data.map((report: any, index: number) => ({
+            id: index + 1,
+            title: report.title || '제목 없음',
+            date: new Date(report.created_at).toISOString().split('T')[0],
+            status: 'completed',
+            score: report.total_score || 0,
+            duration: report.video_duration || '-',
+            reportId: report.report_id
+          }));
+          setLessons(formattedLessons);
         }
-      };
-      
-      refreshReports();
-      
-      await simulateProgress(100, 300);
+      } catch (refreshError) {
+        console.error('보고서 새로고침 실패:', refreshError);
+      }
+
+      setUploadProgress(100);
       
       setTimeout(() => {
         setUploadDialogOpen(false);
@@ -533,10 +590,10 @@ export default function TeacherDashboard() {
         setLessonTitle('');
         setLessonDate(format(new Date(), 'yyyy-MM-dd'));
       }, 800);
-      
+
     } catch (error) {
-      console.error('Upload failed:', error);
-      alert('업로드 중 오류가 발생했습니다.');
+      console.error('❌ Upload failed:', error);
+      alert(error instanceof Error ? error.message : '업로드 중 오류가 발생했습니다.');
     } finally {
       setTimeout(() => {
         setUploading(false);
