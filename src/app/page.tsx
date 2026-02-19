@@ -416,9 +416,9 @@ export default function TeacherDashboard() {
         return;
       }
       
-      const maxSize = 500 * 1024 * 1024;
+      const maxSize = 50 * 1024 * 1024; // 50MB (Supabase 무료 플랜 제한)
       if (file.size > maxSize) {
-        alert(`파일 크기가 너무 큽니다.\n최대 500MB까지 업로드 가능합니다.`);
+        alert(`파일 크기가 너무 큽니다.\n최대 50MB까지 업로드 가능합니다.\n(현재: ${(file.size / 1024 / 1024).toFixed(1)}MB)`);
         event.target.value = '';
         return;
       }
