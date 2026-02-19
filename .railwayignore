@@ -1,0 +1,19 @@
+# Python 관련
+venv/
+__pycache__/
+*.pyc
+teacher_management_python/
+
+# 불필요한 파일
+.git/
+.next/
+node_modules/
+*.log
+.DS_Store
+
+# 테스트 리포트 (용량 큼)
+public/reports/
+
+# 기타
+scripts/*.js
+sogang.jpg

@@ -1,0 +1,55 @@
+﻿{
+  "scores": {
+    "학생_참여도": 17,
+    "개념_설명": 18,
+    "피드백": 17,
+    "수업_체계성": 16,
+    "상호작용": 18
+  },
+  "우수점": [
+    "학생들이 여러 문제 상황에서 연속적으로 발화하고, 질문 및 자신의 생각을 적극적으로 표현함(학생 발화 비율 45%, 적절히 높은 편).",
+    "교사가 학생의 오답이나 혼란을 바로잡고 근거를 설명하는 피드백이 반복적으로 이루어지며, 개념 이해를 위해 여러 방식(방정식, 시각 모델 등)을 활용함.",
+    "실제 상황 문제(쿠키, 피자 등)에서 수학적 개념을 적용하며, 학생들에게 단계적 질문과 설명을 통해 사고를 유도함."
+  ],
+  "개선점": [
+    "일부 설명 및 피드백에서 반복적이거나 우회적인 발화, 장황한 진행으로 인해 학생이 집중력을 잃고 피로감을 드러내는 부분이 있어, 더 간결하고 명확한 안내가 필요함.",
+    "화면 공유, 과제 공지 등 수업의 행정적 진행 중 교사-학생 소통이 잠시 비효율적으로 발생하며, 이에 따라 학습 흐름이 잠시 끊기는 모습이 있음(예: 화면, 노트북, 화면 공유 등 디지털 도구 활용 부분).",
+    "학생이 수학적 이유를 말할 때 좀 더 근거 중심의 설명을 요청하거나, 오개념이 드러날 때 좀 더 깊이 있는 추가 지도(예시·반례 등 활용으로)를 제공하면 좋을 듯함."
+  ],
+  "highlights": [
+    {
+      "timestamp": "7:40",
+      "teacherText": "\"Okay, it's 10 divided by 1 third, which is. If it's divided by 1 third. How do we change this? 10? ... 10 over 3. No, that's 10 divided by 3. ... Good. Oh, 10 times 1 third. Are you just gonna change the sign? ... Good job. It's 10 times 3, right. You should switch, like, 30.\"",
+      "studentText": "\"What is this? 10 divided by 1 third. ... It's 10 over 3. ... 10 times 1 third. ... 10 times 3. ... 30. 30 people were there. Gosh.\"",
+      "reason": "학생이 분수 나눗셈의 개념적 혼동(10/3 vs. 10÷1/3)을 경험하는 과정에서 교사가 단계별 질문과 피드백으로 오개념을 바로잡아 주는 의미 있는 상호작용.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "12:24",
+      "teacherText": "\"No, I. I will ask you again. So what fraction of the whole kilt is a square? This square is what fraction of the whole one?... One third. Michael, is it one third? ... Okay, it's one third. Right. And 1/4. Right. One groups out of four equal groups, which means it's 1/4, right? Oh. One fourth of that squares is red. Do you get it?\"",
+      "studentText": "\"Four? ... Four. One. One third. ... Yeah.\"",
+      "reason": "학생이 복합적인 분수 상황(전체의 1/3과 그중 1/4의 의미)을 이해하는 데 교사가 반복 설명과 유도 질문으로 핵심 개념을 명확히 안내함.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "43:06",
+      "teacherText": "\"It's one end and 13 over 24. Perfect. ... Can we simplify this? Can we simplify. ... No. So no is the answer. What is the unit? If no units then. Wrong.\"",
+      "studentText": "\"It's one end and 13 over 24. Perfect. ... No. ... No, wait, wait. Pounds.\"",
+      "reason": "학생이 계산 과정을 통해 정답에 점점 가까워지면서 단위의 중요성까지 확인함. 교사가 마지막까지 단위를 점검하게 하며, 완성도 있는 수학적 답변의 기준을 제시.",
+      "type": "긍정피드백"
+    },
+    {
+      "timestamp": "25:44",
+      "teacherText": "\"Okay, what about you, Michael, what do you think?\"",
+      "studentText": "\"Times.\"",
+      "reason": "학생이 혼돈스러운 맥락에서도 자신의 계산 방식을 제시하며, 교사가 학생의 의도를 바로 확인하고 왜 틀리거나 맞는지 짚어주려는 적극적 질의와 수용이 이루어짐.",
+      "type": "적극참여"
+    }
+  ],
+  "title": "test1",
+  "teacherId": "선생님",
+  "uploadDate": "2026-01-12T05:10:30.465Z",
+  "filename": "Test_1.mp4",
+  "fileSize": 121980576,
+  "videoDuration": "00:48:04.04"
+}

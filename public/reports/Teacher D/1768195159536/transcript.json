@@ -1,0 +1,1228 @@
+{
+  "id": "42cbd0b9-ea06-4b56-8018-acd8068eda39",
+  "language_model": "assemblyai_default",
+  "acoustic_model": "assemblyai_default",
+  "language_code": "en_us",
+  "speech_understanding": null,
+  "translated_texts": null,
+  "status": "completed",
+  "audio_url": "https://cdn.assemblyai.com/upload/2bea197226200f7564396a10fcae24e4da4f4a4c4410c5c38e4c1a30e4545db9/2c7b5f0f-18e2-406d-bb83-f11cc393ad45",
+  "text": "There's AI ready data. Original data. Yeah. Generation. The customers, dear CSV five foreign. Campaign. Customers, Education, Customer id. Combined. Okay, so AI ready data. Make AI ready. Interaction. Interaction. Yeah. Yeah. So. Him. Open AI API. OpenAI is API key. Open API key. Text, Foreign. F a I s s inde. I mean. Research. Hogan marina. Yeah. So. Content1. Customer profile, age is 31. Single university degree, Single education. Campaign. They worship him. Yeah. Okay. Yeah. So. There.",
+  "words": [
+    {
+      "text": "There's",
+      "start": 33850,
+      "end": 34250,
+      "confidence": 0.78808594,
+      "speaker": "A"
+    },
+    {
+      "text": "AI",
+      "start": 34250,
+      "end": 34810,
+      "confidence": 0.98461914,
+      "speaker": "A"
+    },
+    {
+      "text": "ready",
+      "start": 34810,
+      "end": 35170,
+      "confidence": 0.98413086,
+      "speaker": "A"
+    },
+    {
+      "text": "data.",
+      "start": 35170,
+      "end": 35450,
+      "confidence": 0.96728516,
+      "speaker": "A"
+    },
+    {
+      "text": "Original",
+      "start": 39130,
+      "end": 39730,
+      "confidence": 0.9848633,
+      "speaker": "A"
+    },
+    {
+      "text": "data.",
+      "start": 39730,
+      "end": 40090,
+      "confidence": 0.94433594,
+      "speaker": "A"
+    },
+    {
+      "text": "Yeah.",
+      "start": 191690,
+      "end": 192010,
+      "confidence": 0.81347656,
+      "speaker": "A"
+    },
+    {
+      "text": "Generation.",
+      "start": 253200,
+      "end": 253760,
+      "confidence": 0.76904297,
+      "speaker": "A"
+    },
+    {
+      "text": "The",
+      "start": 347080,
+      "end": 347280,
+      "confidence": 0.6191406,
+      "speaker": "A"
+    },
+    {
+      "text": "customers,",
+      "start": 347280,
+      "end": 348040,
+      "confidence": 0.97436523,
+      "speaker": "A"
+    },
+    {
+      "text": "dear",
+      "start": 348040,
+      "end": 348600,
+      "confidence": 0.9289551,
+      "speaker": "A"
+    },
+    {
+      "text": "CSV",
+      "start": 349000,
+      "end": 349680,
+      "confidence": 0.96158856,
+      "speaker": "A"
+    },
+    {
+      "text": "five",
+      "start": 349680,
+      "end": 350040,
+      "confidence": 0.9584961,
+      "speaker": "A"
+    },
+    {
+      "text": "foreign.",
+      "start": 351190,
+      "end": 353590,
+      "confidence": 0.61572266,
+      "speaker": "A"
+    },
+    {
+      "text": "Campaign.",
+      "start": 456800,
+      "end": 457040,
+      "confidence": 0.70410156,
+      "speaker": "A"
+    },
+    {
+      "text": "Customers,",
+      "start": 513200,
+      "end": 513760,
+      "confidence": 0.7766113,
+      "speaker": "A"
+    },
+    {
+      "text": "Education,",
+      "start": 534480,
+      "end": 534880,
+      "confidence": 0.94628906,
+      "speaker": "A"
+    },
+    {
+      "text": "Customer",
+      "start": 554650,
+      "end": 555130,
+      "confidence": 0.73535156,
+      "speaker": "A"
+    },
+    {
+      "text": "id.",
+      "start": 555130,
+      "end": 555450,
+      "confidence": 0.7495117,
+      "speaker": "A"
+    },
+    {
+      "text": "Combined.",
+      "start": 701690,
+      "end": 702170,
+      "confidence": 0.92366534,
+      "speaker": "A"
+    },
+    {
+      "text": "Okay,",
+      "start": 753660,
+      "end": 753860,
+      "confidence": 0.74104816,
+      "speaker": "A"
+    },
+    {
+      "text": "so",
+      "start": 753860,
+      "end": 754060,
+      "confidence": 0.9736328,
+      "speaker": "A"
+    },
+    {
+      "text": "AI",
+      "start": 754060,
+      "end": 754420,
+      "confidence": 0.96899414,
+      "speaker": "A"
+    },
+    {
+      "text": "ready",
+      "start": 754420,
+      "end": 754740,
+      "confidence": 0.87939453,
+      "speaker": "A"
+    },
+    {
+      "text": "data.",
+      "start": 754740,
+      "end": 755020,
+      "confidence": 0.7441406,
+      "speaker": "A"
+    },
+    {
+      "text": "Make",
+      "start": 781290,
+      "end": 781530,
+      "confidence": 0.9506836,
+      "speaker": "A"
+    },
+    {
+      "text": "AI",
+      "start": 781850,
+      "end": 782330,
+      "confidence": 0.99243164,
+      "speaker": "A"
+    },
+    {
+      "text": "ready.",
+      "start": 782330,
+      "end": 782810,
+      "confidence": 0.9975586,
+      "speaker": "A"
+    },
+    {
+      "text": "Interaction.",
+      "start": 791210,
+      "end": 792090,
+      "confidence": 0.71777344,
+      "speaker": "A"
+    },
+    {
+      "text": "Interaction.",
+      "start": 792490,
+      "end": 793370,
+      "confidence": 0.9763997,
+      "speaker": "A"
+    },
+    {
+      "text": "Yeah.",
+      "start": 832710,
+      "end": 833030,
+      "confidence": 0.9661458,
+      "speaker": "A"
+    },
+    {
+      "text": "Yeah.",
+      "start": 833030,
+      "end": 833430,
+      "confidence": 0.8098958,
+      "speaker": "A"
+    },
+    {
+      "text": "So.",
+      "start": 945990,
+      "end": 946230,
+      "confidence": 0.66503906,
+      "speaker": "A"
+    },
+    {
+      "text": "Him.",
+      "start": 1110100,
+      "end": 1110340,
+      "confidence": 0.37963867,
+      "speaker": "A"
+    },
+    {
+      "text": "Open",
+      "start": 1381580,
+      "end": 1381820,
+      "confidence": 0.6220703,
+      "speaker": "A"
+    },
+    {
+      "text": "AI",
+      "start": 1381900,
+      "end": 1382540,
+      "confidence": 0.9602051,
+      "speaker": "A"
+    },
+    {
+      "text": "API.",
+      "start": 1382700,
+      "end": 1383420,
+      "confidence": 0.9968262,
+      "speaker": "A"
+    },
+    {
+      "text": "OpenAI",
+      "start": 1383580,
+      "end": 1384300,
+      "confidence": 0.87158203,
+      "speaker": "A"
+    },
+    {
+      "text": "is",
+      "start": 1384300,
+      "end": 1384700,
+      "confidence": 0.35546875,
+      "speaker": "A"
+    },
+    {
+      "text": "API",
+      "start": 1385020,
+      "end": 1385700,
+      "confidence": 0.9404297,
+      "speaker": "A"
+    },
+    {
+      "text": "key.",
+      "start": 1385700,
+      "end": 1386060,
+      "confidence": 0.5522461,
+      "speaker": "A"
+    },
+    {
+      "text": "Open",
+      "start": 1404440,
+      "end": 1404680,
+      "confidence": 0.95214844,
+      "speaker": "A"
+    },
+    {
+      "text": "API",
+      "start": 1404840,
+      "end": 1405400,
+      "confidence": 0.83496094,
+      "speaker": "A"
+    },
+    {
+      "text": "key.",
+      "start": 1405400,
+      "end": 1405720,
+      "confidence": 0.8745117,
+      "speaker": "A"
+    },
+    {
+      "text": "Text,",
+      "start": 1459130,
+      "end": 1459450,
+      "confidence": 0.88671875,
+      "speaker": "A"
+    },
+    {
+      "text": "Foreign.",
+      "start": 1490580,
+      "end": 1490900,
+      "confidence": 0.78100586,
+      "speaker": "A"
+    },
+    {
+      "text": "F",
+      "start": 1682100,
+      "end": 1682300,
+      "confidence": 0.76464844,
+      "speaker": "A"
+    },
+    {
+      "text": "a",
+      "start": 1682300,
+      "end": 1682580,
+      "confidence": 0.96240234,
+      "speaker": "A"
+    },
+    {
+      "text": "I",
+      "start": 1682580,
+      "end": 1682820,
+      "confidence": 0.5913086,
+      "speaker": "A"
+    },
+    {
+      "text": "s",
+      "start": 1682820,
+      "end": 1683060,
+      "confidence": 0.9892578,
+      "speaker": "A"
+    },
+    {
+      "text": "s",
+      "start": 1683060,
+      "end": 1683380,
+      "confidence": 0.9868164,
+      "speaker": "A"
+    },
+    {
+      "text": "inde.",
+      "start": 1683940,
+      "end": 1684580,
+      "confidence": 0.9309082,
+      "speaker": "A"
+    },
+    {
+      "text": "I",
+      "start": 1783370,
+      "end": 1783490,
+      "confidence": 0.5361328,
+      "speaker": "A"
+    },
+    {
+      "text": "mean.",
+      "start": 1783490,
+      "end": 1783770,
+      "confidence": 0.98876953,
+      "speaker": "A"
+    },
+    {
+      "text": "Research.",
+      "start": 1917420,
+      "end": 1917660,
+      "confidence": 0.68847656,
+      "speaker": "A"
+    },
+    {
+      "text": "Hogan",
+      "start": 2131800,
+      "end": 2133000,
+      "confidence": 0.5755208,
+      "speaker": "A"
+    },
+    {
+      "text": "marina.",
+      "start": 2133880,
+      "end": 2134520,
+      "confidence": 0.7687988,
+      "speaker": "A"
+    },
+    {
+      "text": "Yeah.",
+      "start": 2160050,
+      "end": 2160370,
+      "confidence": 0.73795575,
+      "speaker": "A"
+    },
+    {
+      "text": "So.",
+      "start": 2161010,
+      "end": 2161410,
+      "confidence": 0.78759766,
+      "speaker": "A"
+    },
+    {
+      "text": "Content1.",
+      "start": 2210020,
+      "end": 2210900,
+      "confidence": 0.73584,
+      "speaker": "A"
+    },
+    {
+      "text": "Customer",
+      "start": 2215060,
+      "end": 2215660,
+      "confidence": 0.98779297,
+      "speaker": "A"
+    },
+    {
+      "text": "profile,",
+      "start": 2215660,
+      "end": 2216140,
+      "confidence": 0.99975586,
+      "speaker": "A"
+    },
+    {
+      "text": "age",
+      "start": 2216140,
+      "end": 2216460,
+      "confidence": 0.98876953,
+      "speaker": "A"
+    },
+    {
+      "text": "is",
+      "start": 2216460,
+      "end": 2216740,
+      "confidence": 0.83691406,
+      "speaker": "A"
+    },
+    {
+      "text": "31.",
+      "start": 2216740,
+      "end": 2217300,
+      "confidence": 0.9541,
+      "speaker": "A"
+    },
+    {
+      "text": "Single",
+      "start": 2219700,
+      "end": 2220340,
+      "confidence": 0.8000488,
+      "speaker": "A"
+    },
+    {
+      "text": "university",
+      "start": 2221620,
+      "end": 2222020,
+      "confidence": 0.66796875,
+      "speaker": "A"
+    },
+    {
+      "text": "degree,",
+      "start": 2222020,
+      "end": 2222660,
+      "confidence": 0.8175456,
+      "speaker": "A"
+    },
+    {
+      "text": "Single",
+      "start": 2239430,
+      "end": 2239990,
+      "confidence": 0.81347656,
+      "speaker": "A"
+    },
+    {
+      "text": "education.",
+      "start": 2239990,
+      "end": 2240390,
+      "confidence": 0.9970703,
+      "speaker": "A"
+    },
+    {
+      "text": "Campaign.",
+      "start": 2458670,
+      "end": 2458910,
+      "confidence": 0.83935547,
+      "speaker": "A"
+    },
+    {
+      "text": "They",
+      "start": 2726350,
+      "end": 2726510,
+      "confidence": 0.9472656,
+      "speaker": "A"
+    },
+    {
+      "text": "worship",
+      "start": 2726510,
+      "end": 2726870,
+      "confidence": 0.8728841,
+      "speaker": "A"
+    },
+    {
+      "text": "him.",
+      "start": 2726870,
+      "end": 2727150,
+      "confidence": 0.53466797,
+      "speaker": "A"
+    },
+    {
+      "text": "Yeah.",
+      "start": 2831250,
+      "end": 2831570,
+      "confidence": 0.93652344,
+      "speaker": "A"
+    },
+    {
+      "text": "Okay.",
+      "start": 2863040,
+      "end": 2863440,
+      "confidence": 0.87630206,
+      "speaker": "A"
+    },
+    {
+      "text": "Yeah.",
+      "start": 2916530,
+      "end": 2916850,
+      "confidence": 0.7203776,
+      "speaker": "A"
+    },
+    {
+      "text": "So.",
+      "start": 3077830,
+      "end": 3078070,
+      "confidence": 0.70654297,
+      "speaker": "A"
+    },
+    {
+      "text": "There.",
+      "start": 3160040,
+      "end": 3160280,
+      "confidence": 0.58691406,
+      "speaker": "A"
+    }
+  ],
+  "utterances": [
+    {
+      "speaker": "A",
+      "text": "There's AI ready data. Original data. Yeah. Generation. The customers, dear CSV five foreign. Campaign. Customers, Education, Customer id. Combined. Okay, so AI ready data. Make AI ready. Interaction. Interaction. Yeah. Yeah. So. Him. Open AI API. OpenAI is API key. Open API key. Text, Foreign. F a I s s inde. I mean. Research. Hogan marina. Yeah. So. Content1. Customer profile, age is 31. Single university degree, Single education. Campaign. They worship him. Yeah. Okay. Yeah. So. There.",
+      "confidence": 0.82847214,
+      "start": 33850,
+      "end": 3160280,
+      "words": [
+        {
+          "text": "There's",
+          "start": 33850,
+          "end": 34250,
+          "confidence": 0.78808594,
+          "speaker": "A"
+        },
+        {
+          "text": "AI",
+          "start": 34250,
+          "end": 34810,
+          "confidence": 0.98461914,
+          "speaker": "A"
+        },
+        {
+          "text": "ready",
+          "start": 34810,
+          "end": 35170,
+          "confidence": 0.98413086,
+          "speaker": "A"
+        },
+        {
+          "text": "data.",
+          "start": 35170,
+          "end": 35450,
+          "confidence": 0.96728516,
+          "speaker": "A"
+        },
+        {
+          "text": "Original",
+          "start": 39130,
+          "end": 39730,
+          "confidence": 0.9848633,
+          "speaker": "A"
+        },
+        {
+          "text": "data.",
+          "start": 39730,
+          "end": 40090,
+          "confidence": 0.94433594,
+          "speaker": "A"
+        },
+        {
+          "text": "Yeah.",
+          "start": 191690,
+          "end": 192010,
+          "confidence": 0.81347656,
+          "speaker": "A"
+        },
+        {
+          "text": "Generation.",
+          "start": 253200,
+          "end": 253760,
+          "confidence": 0.76904297,
+          "speaker": "A"
+        },
+        {
+          "text": "The",
+          "start": 347080,
+          "end": 347280,
+          "confidence": 0.6191406,
+          "speaker": "A"
+        },
+        {
+          "text": "customers,",
+          "start": 347280,
+          "end": 348040,
+          "confidence": 0.97436523,
+          "speaker": "A"
+        },
+        {
+          "text": "dear",
+          "start": 348040,
+          "end": 348600,
+          "confidence": 0.9289551,
+          "speaker": "A"
+        },
+        {
+          "text": "CSV",
+          "start": 349000,
+          "end": 349680,
+          "confidence": 0.96158856,
+          "speaker": "A"
+        },
+        {
+          "text": "five",
+          "start": 349680,
+          "end": 350040,
+          "confidence": 0.9584961,
+          "speaker": "A"
+        },
+        {
+          "text": "foreign.",
+          "start": 351190,
+          "end": 353590,
+          "confidence": 0.61572266,
+          "speaker": "A"
+        },
+        {
+          "text": "Campaign.",
+          "start": 456800,
+          "end": 457040,
+          "confidence": 0.70410156,
+          "speaker": "A"
+        },
+        {
+          "text": "Customers,",
+          "start": 513200,
+          "end": 513760,
+          "confidence": 0.7766113,
+          "speaker": "A"
+        },
+        {
+          "text": "Education,",
+          "start": 534480,
+          "end": 534880,
+          "confidence": 0.94628906,
+          "speaker": "A"
+        },
+        {
+          "text": "Customer",
+          "start": 554650,
+          "end": 555130,
+          "confidence": 0.73535156,
+          "speaker": "A"
+        },
+        {
+          "text": "id.",
+          "start": 555130,
+          "end": 555450,
+          "confidence": 0.7495117,
+          "speaker": "A"
+        },
+        {
+          "text": "Combined.",
+          "start": 701690,
+          "end": 702170,
+          "confidence": 0.92366534,
+          "speaker": "A"
+        },
+        {
+          "text": "Okay,",
+          "start": 753660,
+          "end": 753860,
+          "confidence": 0.74104816,
+          "speaker": "A"
+        },
+        {
+          "text": "so",
+          "start": 753860,
+          "end": 754060,
+          "confidence": 0.9736328,
+          "speaker": "A"
+        },
+        {
+          "text": "AI",
+          "start": 754060,
+          "end": 754420,
+          "confidence": 0.96899414,
+          "speaker": "A"
+        },
+        {
+          "text": "ready",
+          "start": 754420,
+          "end": 754740,
+          "confidence": 0.87939453,
+          "speaker": "A"
+        },
+        {
+          "text": "data.",
+          "start": 754740,
+          "end": 755020,
+          "confidence": 0.7441406,
+          "speaker": "A"
+        },
+        {
+          "text": "Make",
+          "start": 781290,
+          "end": 781530,
+          "confidence": 0.9506836,
+          "speaker": "A"
+        },
+        {
+          "text": "AI",
+          "start": 781850,
+          "end": 782330,
+          "confidence": 0.99243164,
+          "speaker": "A"
+        },
+        {
+          "text": "ready.",
+          "start": 782330,
+          "end": 782810,
+          "confidence": 0.9975586,
+          "speaker": "A"
+        },
+        {
+          "text": "Interaction.",
+          "start": 791210,
+          "end": 792090,
+          "confidence": 0.71777344,
+          "speaker": "A"
+        },
+        {
+          "text": "Interaction.",
+          "start": 792490,
+          "end": 793370,
+          "confidence": 0.9763997,
+          "speaker": "A"
+        },
+        {
+          "text": "Yeah.",
+          "start": 832710,
+          "end": 833030,
+          "confidence": 0.9661458,
+          "speaker": "A"
+        },
+        {
+          "text": "Yeah.",
+          "start": 833030,
+          "end": 833430,
+          "confidence": 0.8098958,
+          "speaker": "A"
+        },
+        {
+          "text": "So.",
+          "start": 945990,
+          "end": 946230,
+          "confidence": 0.66503906,
+          "speaker": "A"
+        },
+        {
+          "text": "Him.",
+          "start": 1110100,
+          "end": 1110340,
+          "confidence": 0.37963867,
+          "speaker": "A"
+        },
+        {
+          "text": "Open",
+          "start": 1381580,
+          "end": 1381820,
+          "confidence": 0.6220703,
+          "speaker": "A"
+        },
+        {
+          "text": "AI",
+          "start": 1381900,
+          "end": 1382540,
+          "confidence": 0.9602051,
+          "speaker": "A"
+        },
+        {
+          "text": "API.",
+          "start": 1382700,
+          "end": 1383420,
+          "confidence": 0.9968262,
+          "speaker": "A"
+        },
+        {
+          "text": "OpenAI",
+          "start": 1383580,
+          "end": 1384300,
+          "confidence": 0.87158203,
+          "speaker": "A"
+        },
+        {
+          "text": "is",
+          "start": 1384300,
+          "end": 1384700,
+          "confidence": 0.35546875,
+          "speaker": "A"
+        },
+        {
+          "text": "API",
+          "start": 1385020,
+          "end": 1385700,
+          "confidence": 0.9404297,
+          "speaker": "A"
+        },
+        {
+          "text": "key.",
+          "start": 1385700,
+          "end": 1386060,
+          "confidence": 0.5522461,
+          "speaker": "A"
+        },
+        {
+          "text": "Open",
+          "start": 1404440,
+          "end": 1404680,
+          "confidence": 0.95214844,
+          "speaker": "A"
+        },
+        {
+          "text": "API",
+          "start": 1404840,
+          "end": 1405400,
+          "confidence": 0.83496094,
+          "speaker": "A"
+        },
+        {
+          "text": "key.",
+          "start": 1405400,
+          "end": 1405720,
+          "confidence": 0.8745117,
+          "speaker": "A"
+        },
+        {
+          "text": "Text,",
+          "start": 1459130,
+          "end": 1459450,
+          "confidence": 0.88671875,
+          "speaker": "A"
+        },
+        {
+          "text": "Foreign.",
+          "start": 1490580,
+          "end": 1490900,
+          "confidence": 0.78100586,
+          "speaker": "A"
+        },
+        {
+          "text": "F",
+          "start": 1682100,
+          "end": 1682300,
+          "confidence": 0.76464844,
+          "speaker": "A"
+        },
+        {
+          "text": "a",
+          "start": 1682300,
+          "end": 1682580,
+          "confidence": 0.96240234,
+          "speaker": "A"
+        },
+        {
+          "text": "I",
+          "start": 1682580,
+          "end": 1682820,
+          "confidence": 0.5913086,
+          "speaker": "A"
+        },
+        {
+          "text": "s",
+          "start": 1682820,
+          "end": 1683060,
+          "confidence": 0.9892578,
+          "speaker": "A"
+        },
+        {
+          "text": "s",
+          "start": 1683060,
+          "end": 1683380,
+          "confidence": 0.9868164,
+          "speaker": "A"
+        },
+        {
+          "text": "inde.",
+          "start": 1683940,
+          "end": 1684580,
+          "confidence": 0.9309082,
+          "speaker": "A"
+        },
+        {
+          "text": "I",
+          "start": 1783370,
+          "end": 1783490,
+          "confidence": 0.5361328,
+          "speaker": "A"
+        },
+        {
+          "text": "mean.",
+          "start": 1783490,
+          "end": 1783770,
+          "confidence": 0.98876953,
+          "speaker": "A"
+        },
+        {
+          "text": "Research.",
+          "start": 1917420,
+          "end": 1917660,
+          "confidence": 0.68847656,
+          "speaker": "A"
+        },
+        {
+          "text": "Hogan",
+          "start": 2131800,
+          "end": 2133000,
+          "confidence": 0.5755208,
+          "speaker": "A"
+        },
+        {
+          "text": "marina.",
+          "start": 2133880,
+          "end": 2134520,
+          "confidence": 0.7687988,
+          "speaker": "A"
+        },
+        {
+          "text": "Yeah.",
+          "start": 2160050,
+          "end": 2160370,
+          "confidence": 0.73795575,
+          "speaker": "A"
+        },
+        {
+          "text": "So.",
+          "start": 2161010,
+          "end": 2161410,
+          "confidence": 0.78759766,
+          "speaker": "A"
+        },
+        {
+          "text": "Content1.",
+          "start": 2210020,
+          "end": 2210900,
+          "confidence": 0.73584,
+          "speaker": "A"
+        },
+        {
+          "text": "Customer",
+          "start": 2215060,
+          "end": 2215660,
+          "confidence": 0.98779297,
+          "speaker": "A"
+        },
+        {
+          "text": "profile,",
+          "start": 2215660,
+          "end": 2216140,
+          "confidence": 0.99975586,
+          "speaker": "A"
+        },
+        {
+          "text": "age",
+          "start": 2216140,
+          "end": 2216460,
+          "confidence": 0.98876953,
+          "speaker": "A"
+        },
+        {
+          "text": "is",
+          "start": 2216460,
+          "end": 2216740,
+          "confidence": 0.83691406,
+          "speaker": "A"
+        },
+        {
+          "text": "31.",
+          "start": 2216740,
+          "end": 2217300,
+          "confidence": 0.9541,
+          "speaker": "A"
+        },
+        {
+          "text": "Single",
+          "start": 2219700,
+          "end": 2220340,
+          "confidence": 0.8000488,
+          "speaker": "A"
+        },
+        {
+          "text": "university",
+          "start": 2221620,
+          "end": 2222020,
+          "confidence": 0.66796875,
+          "speaker": "A"
+        },
+        {
+          "text": "degree,",
+          "start": 2222020,
+          "end": 2222660,
+          "confidence": 0.8175456,
+          "speaker": "A"
+        },
+        {
+          "text": "Single",
+          "start": 2239430,
+          "end": 2239990,
+          "confidence": 0.81347656,
+          "speaker": "A"
+        },
+        {
+          "text": "education.",
+          "start": 2239990,
+          "end": 2240390,
+          "confidence": 0.9970703,
+          "speaker": "A"
+        },
+        {
+          "text": "Campaign.",
+          "start": 2458670,
+          "end": 2458910,
+          "confidence": 0.83935547,
+          "speaker": "A"
+        },
+        {
+          "text": "They",
+          "start": 2726350,
+          "end": 2726510,
+          "confidence": 0.9472656,
+          "speaker": "A"
+        },
+        {
+          "text": "worship",
+          "start": 2726510,
+          "end": 2726870,
+          "confidence": 0.8728841,
+          "speaker": "A"
+        },
+        {
+          "text": "him.",
+          "start": 2726870,
+          "end": 2727150,
+          "confidence": 0.53466797,
+          "speaker": "A"
+        },
+        {
+          "text": "Yeah.",
+          "start": 2831250,
+          "end": 2831570,
+          "confidence": 0.93652344,
+          "speaker": "A"
+        },
+        {
+          "text": "Okay.",
+          "start": 2863040,
+          "end": 2863440,
+          "confidence": 0.87630206,
+          "speaker": "A"
+        },
+        {
+          "text": "Yeah.",
+          "start": 2916530,
+          "end": 2916850,
+          "confidence": 0.7203776,
+          "speaker": "A"
+        },
+        {
+          "text": "So.",
+          "start": 3077830,
+          "end": 3078070,
+          "confidence": 0.70654297,
+          "speaker": "A"
+        },
+        {
+          "text": "There.",
+          "start": 3160040,
+          "end": 3160280,
+          "confidence": 0.58691406,
+          "speaker": "A"
+        }
+      ]
+    }
+  ],
+  "confidence": 0.82847214,
+  "audio_duration": 3174,
+  "punctuate": true,
+  "format_text": true,
+  "dual_channel": false,
+  "webhook_url": null,
+  "webhook_status_code": null,
+  "webhook_auth": false,
+  "webhook_auth_header_name": null,
+  "speed_boost": false,
+  "auto_highlights_result": null,
+  "auto_highlights": false,
+  "audio_start_from": null,
+  "audio_end_at": null,
+  "word_boost": [
+    "teacher",
+    "student",
+    "math",
+    "problem",
+    "answer",
+    "calculation",
+    "fraction",
+    "multiplication",
+    "division"
+  ],
+  "boost_param": "high",
+  "prompt": null,
+  "keyterms_prompt": [],
+  "filter_profanity": false,
+  "redact_pii": false,
+  "redact_pii_audio": false,
+  "redact_pii_audio_quality": null,
+  "redact_pii_audio_options": null,
+  "redact_pii_policies": null,
+  "redact_pii_sub": null,
+  "speaker_labels": true,
+  "speaker_options": null,
+  "content_safety": false,
+  "iab_categories": false,
+  "content_safety_labels": {
+    "status": "unavailable",
+    "results": [],
+    "summary": {}
+  },
+  "iab_categories_result": {
+    "status": "unavailable",
+    "results": [],
+    "summary": {}
+  },
+  "language_detection": false,
+  "language_detection_options": null,
+  "language_detection_results": null,
+  "language_confidence_threshold": null,
+  "language_confidence": null,
+  "custom_spelling": null,
+  "throttled": false,
+  "auto_chapters": false,
+  "summarization": false,
+  "summary_type": null,
+  "summary_model": null,
+  "custom_topics": false,
+  "topics": [],
+  "speech_threshold": null,
+  "speech_model": "best",
+  "speech_models": null,
+  "speech_model_used": "universal",
+  "chapters": null,
+  "disfluencies": false,
+  "entity_detection": true,
+  "sentiment_analysis": false,
+  "sentiment_analysis_results": null,
+  "entities": [
+    {
+      "entity_type": "organization",
+      "text": "Hogan marina",
+      "start": 2131800,
+      "end": 2134520
+    },
+    {
+      "entity_type": "person_age",
+      "text": "31",
+      "start": 2216740,
+      "end": 2217300
+    },
+    {
+      "entity_type": "marital_status",
+      "text": "Single",
+      "start": 2239430,
+      "end": 2239990
+    }
+  ],
+  "speakers_expected": null,
+  "summary": null,
+  "custom_topics_results": null,
+  "is_deleted": null,
+  "multichannel": null,
+  "project_id": 460406,
+  "token_id": 460406
+}

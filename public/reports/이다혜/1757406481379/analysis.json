@@ -1,0 +1,62 @@
+﻿{
+  "scores": {
+    "학생_참여도": 18,
+    "개념_설명": 19,
+    "피드백": 18,
+    "수업_체계성": 17,
+    "상호작용": 18
+  },
+  "우수점": [
+    "학생의 자발적 발언, 질문, 오답 시도 등 적극적 참여가 매우 활발하게 이루어짐",
+    "교사가 수학적 개념(분수의 나눗셈, 동치분수, 단위 변환 등)을 반복적으로 명확히 설명하고, 시각 자료를 바탕으로 다각적으로 지도함",
+    "학생의 오답·질문에 대해 인내심 있게 경청하고, 왜 틀렸는지, 어떻게 접근해야 하는지 구조적으로 피드백 제공"
+  ],
+  "개선점": [
+    "일부 복잡한 문제 풀이 과정에서 교사의 안내가 상당히 길어져 학생 질문과 발언이 잠시 줄어드는 구간이 있음(학생의 사고 시간을 더 충분히 확보할 수 있음)",
+    "수업 후반부 정보처리(화면 공유, 자료 전달 등) 관련 교사-학생 간 혼선 발생, 학습집중도가 잠시 저하됨",
+    "정답 도출 이후의 추가적 문제 확장, 응용(유의적 학습 촉진)을 더 자주 시도하면 학습효과가 더욱 향상될 수 있음"
+  ],
+  "highlights": [
+    {
+      "timestamp": "07:40",
+      "teacherText": "“Okay, it's 10 divided by 1 third, which is. If it's divided by 1 third. How do we change this? 10?... 10 times 3. Right. Gosh. 30 people could eat the pizza. Right? Okay, so any questions in this part? Do you get this now?\"",
+      "studentText": "\"What is this? 10 divided by 1 third.\" / \"It's 10 over 3.\" / \"10 times 1 third.\" / \"You should switch, like, 30. 30. 30 people were there.\"",
+      "reason": "분수의 나눗셈이라는 어려운 개념을 교사와 학생이 서로 식을 바꿔 써보고 의미를 반복 확인하며, 학생의 단위 오해를 교정해 주는 과정이 잘 드러남.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "13:20",
+      "teacherText": "“Oh. So 1/4 of the squares, which means it's 1. What is the equation? How do we get 1/4 of 1/3? Who knows how to do this?\"",
+      "studentText": "\"Not me.\" / \"14 times 1 third.\" / \"Yes. 14 times 1 third.\" / \"It's 1 12th, 1 12th.\"",
+      "reason": "교사가 학생에게 곱셈식을 유도하고, 학생 스스로 곱셈원리를 시도·정정하며 개념적으로 사고하는 장면이 나타남.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "28:04",
+      "teacherText": "\"Are you looking at this, guys? So look at this. The big field yields three and two fifths tons, right? Yeah. And the small field yields two and 112 of tons of pumpkins. Right? The total yield of pumpkins, 2, 112. We should add these two. Right. So what, what do we have to do with this number?\"",
+      "studentText": "\"No.\" / \"Again, it's 3 2/5.\" / \"3 and 2 fifth plus 3 and 2 fifth time.\"",
+      "reason": "학생이 곱셈/덧셈, 필요 정보 판별에 혼동하는 부분을 교사가 구체적으로 질문하며 정확한 수학적 사고 경로로 유도함.",
+      "type": "긍정피드백"
+    },
+    {
+      "timestamp": "40:24",
+      "teacherText": "\"You have to understand the situation. Question. Do you get it? Yes. So can you please resolve this question? Oh, Michael's solving. I can see that. What about Abby?\"",
+      "studentText": "\"Oh, wait, don't. Don't tell the answer yet. Abby solving. Right.\"",
+      "reason": "'more', 'less'와 같은 언어적 혼동에서 학생의 오개념을 실제 상황 예시(쿠키 문제)로 구체적으로 안내하고, 직접 문제를 해결하게 하는 과정이 드러남.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "47:03",
+      "teacherText": "“Are you sure?”",
+      "studentText": "“No. 0.18. This is 1800s. Is this 1800s? No. This is 1 and 8, 10, which is 1 and 8/10. Do you get it? This is 1 8, 10 liter.”",
+      "reason": "소수와 분수 변환 과정에서 학생의 오개념(자리값, 표기 오류)을 질문-확인-설명으로 명확하게 정정하는 교육적 상호작용이 이루어짐.",
+      "type": "긍정피드백"
+    }
+  ],
+  "title": "test영상",
+  "teacherId": "이다혜",
+  "uploadDate": "2025-09-09T08:30:36.717Z",
+  "filename": "Test_1.mp4",
+  "fileSize": 121980576,
+  "videoDuration": "00:48:04.04"
+}

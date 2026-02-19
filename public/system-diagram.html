@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시스템 구성도 - Teacher Analytics</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+      color: white;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 2rem;
+      background: linear-gradient(90deg, #fff, #c7d2fe, #f5d0fe, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .subtitle {
+      text-align: center;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 40px;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .diagram-section {
+      background: rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 40px;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    
+    .section-title {
+      font-size: 1.4rem;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .section-title .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+    
+    .teacher-section .section-title .icon {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+    
+    .admin-section .section-title .icon {
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+    }
+    
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 20px 0;
+    }
+    
+    .flow-box {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 15px 20px;
+      text-align: center;
+      min-width: 120px;
+      transition: all 0.3s ease;
+    }
+    
+    .flow-box:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.15);
+    }
+    
+    .flow-box .box-icon {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+    
+    .flow-box .box-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+    
+    .flow-box .box-desc {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.6);
+    }
+    
+    .flow-arrow {
+      font-size: 1.5rem;
+      color: rgba(255,255,255,0.5);
+    }
+    
+    .flow-box.highlight-teacher {
+      background: linear-gradient(135deg, rgba(102,126,234,0.3), rgba(118,75,162,0.3));
+      border-color: rgba(102,126,234,0.5);
+    }
+    
+    .flow-box.highlight-admin {
+      background: linear-gradient(135deg, rgba(240,147,251,0.3), rgba(245,87,108,0.3));
+      border-color: rgba(240,147,251,0.5);
+    }
+    
+    .flow-box.external {
+      background: linear-gradient(135deg, rgba(17,153,142,0.3), rgba(56,239,125,0.3));
+      border-color: rgba(56,239,125,0.5);
+    }
+    
+    .flow-box.storage {
+      background: linear-gradient(135deg, rgba(252,92,125,0.3), rgba(106,130,251,0.3));
+      border-color: rgba(252,92,125,0.5);
+    }
+    
+    /* 상세 구조 */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
+    }
+    
+    .detail-card {
+      background: rgba(0,0,0,0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border-left: 4px solid;
+    }
+    
+    .detail-card.frontend {
+      border-color: #667eea;
+    }
+    
+    .detail-card.backend {
+      border-color: #11998e;
+    }
+    
+    .detail-card.external {
+      border-color: #f093fb;
+    }
+    
+    .detail-card.storage {
+      border-color: #FC5C7D;
+    }
+    
+    .detail-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .detail-card ul {
+      list-style: none;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.8);
+    }
+    
+    .detail-card li {
+      padding: 4px 0;
+      padding-left: 15px;
+      position: relative;
+    }
+    
+    .detail-card li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: rgba(255,255,255,0.4);
+    }
+    
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.7);
+    }
+    
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+    }
+    
+    @media (max-width: 768px) {
+      .flow-diagram {
+        flex-direction: column;
+      }
+      .flow-arrow {
+        transform: rotate(90deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Teacher Analytics</h1>
+    <p class="subtitle">AI-Powered Lesson Analytics Platform · 시스템 구성도</p>
+    
+    <!-- 교사용 시스템 구성도 -->
+    <div class="diagram-section teacher-section">
+      <h2 class="section-title">
+        <span class="icon">👨‍🏫</span>
+        교사용(Teacher) 시스템 구성도
+      </h2>
+      
+      <div class="flow-diagram">
+        <div class="flow-box highlight-teacher">
+          <div class="box-icon">🖥️</div>
+          <div class="box-title">교사 브라우저</div>
+          <div class="box-desc">대시보드 접속</div>
+        </div>
+        
+        <div class="flow-arrow">→</div>
+        
+        <div class="flow-box highlight-teacher">
+          <div class="box-icon">📹</div>
+          <div class="box-title">영상 업로드</div>
+          <div class="box-desc">수업 영상 선택</div>
+        </div>
+        
+        <div class="flow-arrow">→</div>
+        
+        <div class="flow-box">
+          <div class="box-icon">⚙️</div>
+          <div class="box-title">백엔드 API</div>
+          <div class="box-desc">Next.js Route</div>
+        </div>
+        
+        <div class="flow-arrow">→</div>
+        
+        <div class="flow-box">
+          <div class="box-icon">🎵</div>
+          <div class="box-title">FFmpeg</div>
+          <div class="box-desc">오디오 추출</div>
+        </div>
+        
+        <div class="flow-arrow">→</div>
+        
+        <div class="flow-box external">
+          <div class="box-icon">🎤</div>
+          <div class="box-title">AssemblyAI</div>
+          <div class="box-desc">전사+화자구분</div>
+        </div>
+        
+        <div class="flow-arrow">→</div>
+        
+        <div class="flow-box external">
+          <div class="box-icon">🤖</div>
+          <div class="box-title">OpenRouter</div>
+          <div class="box-desc">Gemini 분석</div>
+        </div>
+        
+        <div class="flow-arrow">→</div>
+        
+        <div class="flow-box storage">
+          <div class="box-icon">💾</div>
+          <div class="box-title">저장소</div>
+          <div class="box-desc">DB + 파일</div>
+        </div>
+        
+        <div class="flow-arrow">→</div>
+        
+        <div class="flow-box highlight-teacher">
+          <div class="box-icon">📊</div>
+          <div class="box-title">리포트 확인</div>
+          <div class="box-desc">점수/강점/개선</div>
+        </div>
+      </div>
+      
+      <div class="detail-grid">
+        <div class="detail-card frontend">
+          <h4>🖥️ 프론트엔드</h4>
+          <ul>
+            <li>Next.js 15 App Router</li>
+            <li>React 19 + TypeScript</li>
+            <li>MUI + Emotion (UI)</li>
+            <li>교사용 대시보드</li>
+            <li>리포트 상세 화면</li>
+          </ul>
+        </div>
+        
+        <div class="detail-card backend">
+          <h4>⚙️ 백엔드 API</h4>
+          <ul>
+            <li>Route Handlers (API)</li>
+            <li>FFmpeg 오디오 추출</li>
+            <li>영상 업로드 처리</li>
+            <li>SSE 진행률 업데이트</li>
+          </ul>
+        </div>
+        
+        <div class="detail-card external">
+          <h4>🌐 외부 AI/전사</h4>
+          <ul>
+            <li>AssemblyAI (STT)</li>
+            <li>화자 구분 (utterances)</li>
+            <li>OpenRouter (Gemini)</li>
+            <li>수업 분석/점수 산출</li>
+          </ul>
+        </div>
+        
+        <div class="detail-card storage">
+          <h4>💾 저장소</h4>
+          <ul>
+            <li>Supabase Postgres</li>
+            <li>reports/profiles 테이블</li>
+            <li>파일: analysis.json</li>
+            <li>파일: transcript.json</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 원장/관리자용 시스템 구성도 -->
+    <div class="diagram-section admin-section">
+      <h2 class="section-title">
+        <span class="icon">👔</span>
+        원장/관리자용(Admin) 시스템 구성도
+      </h2>
+      
+      <div class="flow-diagram">
+        <div class="flow-box highlight-admin">
+          <div class="box-icon">🖥️</div>
+          <div class="box-title">관리자 브라우저</div>
+          <div class="box-desc">대시보드 접속</div>
+        </div>
+        
+        <div class="flow-arrow">→</div>
+        
+        <div class="flow-box">
+          <div class="box-icon">⚙️</div>
+          <div class="box-title">백엔드 API</div>
+          <div class="box-desc">통계/요약 조회</div>
+        </div>
+        
+        <div class="flow-arrow">→</div>
+        
+        <div class="flow-box storage">
+          <div class="box-icon">💾</div>
+          <div class="box-title">DB 조회</div>
+          <div class="box-desc">교사별 데이터</div>
+        </div>
+        
+        <div class="flow-arrow">→</div>
+        
+        <div class="flow-box highlight-admin">
+          <div class="box-icon">📈</div>
+          <div class="box-title">전체 통계</div>
+          <div class="box-desc">교사수/보고서수</div>
+        </div>
+        
+        <div class="flow-arrow">→</div>
+        
+        <div class="flow-box highlight-admin">
+          <div class="box-icon">👥</div>
+          <div class="box-title">교사 목록</div>
+          <div class="box-desc">평균점수/순위</div>
+        </div>
+      </div>
+      
+      <div class="flow-diagram" style="margin-top: 20px;">
+        <div class="flow-box highlight-admin">
+          <div class="box-icon">👤</div>
+          <div class="box-title">교사 선택</div>
+          <div class="box-desc">상세 평가 진입</div>
+        </div>
+        
+        <div class="flow-arrow">→</div>
+        
+        <div class="flow-box">
+          <div class="box-icon">⚙️</div>
+          <div class="box-title">백엔드 API</div>
+          <div class="box-desc">요약/AI분석 호출</div>
+        </div>
+        
+        <div class="flow-arrow">→</div>
+        
+        <div class="flow-box external">
+          <div class="box-icon">🤖</div>
+          <div class="box-title">OpenRouter</div>
+          <div class="box-desc">AI 종합평가</div>
+        </div>
+        
+        <div class="flow-arrow">→</div>
+        
+        <div class="flow-box highlight-admin">
+          <div class="box-icon">📋</div>
+          <div class="box-title">종합 평가</div>
+          <div class="box-desc">강점/개선 빈도</div>
+        </div>
+        
+        <div class="flow-arrow">→</div>
+        
+        <div class="flow-box highlight-admin">
+          <div class="box-icon">⚖️</div>
+          <div class="box-title">비교 분석</div>
+          <div class="box-desc">교사간 비교</div>
+        </div>
+      </div>
+      
+      <div class="detail-grid">
+        <div class="detail-card frontend">
+          <h4>🖥️ 프론트엔드</h4>
+          <ul>
+            <li>관리자 대시보드</li>
+            <li>전체 통계 카드</li>
+            <li>교사 목록/카드</li>
+            <li>교사별 종합평가 화면</li>
+            <li>교사 비교분석 화면</li>
+          </ul>
+        </div>
+        
+        <div class="detail-card backend">
+          <h4>⚙️ 백엔드 API</h4>
+          <ul>
+            <li>/api/reports/stats</li>
+            <li>/api/reports/summary/[teacher]</li>
+            <li>/api/reports/ai-summary/[teacher]</li>
+            <li>통계 집계/요약 처리</li>
+          </ul>
+        </div>
+        
+        <div class="detail-card external">
+          <h4>🌐 외부 AI</h4>
+          <ul>
+            <li>OpenRouter (Gemini)</li>
+            <li>교사별 AI 종합평가</li>
+            <li>한국어/영어 지원</li>
+          </ul>
+        </div>
+        
+        <div class="detail-card storage">
+          <h4>💾 저장소</h4>
+          <ul>
+            <li>Supabase Postgres</li>
+            <li>reports 테이블 집계</li>
+            <li>profiles 교사 목록</li>
+            <li>RLS 정책 (admin 전체조회)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 범례 -->
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-color" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+        <span>교사용 UI</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: linear-gradient(135deg, #f093fb, #f5576c);"></div>
+        <span>관리자용 UI</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: linear-gradient(135deg, #11998e, #38ef7d);"></div>
+        <span>외부 AI/전사 서비스</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: linear-gradient(135deg, #FC5C7D, #6A82FB);"></div>
+        <span>저장소 (DB/파일)</span>
+      </div>
+    </div>
+    
+  </div>
+</body>
+</html>

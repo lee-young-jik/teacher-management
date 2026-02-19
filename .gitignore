@@ -81,3 +81,4 @@ tmp/
 
 # Uploaded files
 public/uploads/
+.vercel

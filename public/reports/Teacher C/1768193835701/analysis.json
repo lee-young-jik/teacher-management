@@ -1,0 +1,69 @@
+﻿{
+  "scores": {
+    "학생_참여도": 18,
+    "개념_설명": 18,
+    "피드백": 17,
+    "수업_체계성": 19,
+    "상호작용": 18
+  },
+  "우수점": [
+    "학생들이 계속해서 질문하고, 다양한 형태로 자기 생각을 표현하며 참여도가 높음(예: 문제 상황을 본인 방식으로 재구성, 수차례 질문 등).",
+    "교사가 각 단계마다 개념에 대해 반복 질문—“이해했나요?”, “왜 그렇게 생각했는지 설명해보세요” 등—을 통해 학생의 개념 이해도 점검 및 심화 유도.",
+    "오답이나 혼란이 생긴 부분(예: 분수의 연산, 필요 정보 분석 등)에 대해 구체적이고 반복적으로 피드백과 교정, 추가 설명을 제공함."
+  ],
+  "개선점": [
+    "학생 발화 중 산만해지는 부분이나 화면 공유 등 수업 집중도 저하 상황이 일정 구간 반복되어, 수업 흐름 관리와 집중 유도에 추가적인 전략이 필요함.",
+    "학생 일부가 중간에 문제 풀이의 논리적 전개에서 혼란을 보였으나, 이를 더욱 구조화하여 요약 정리 및 단계적 안내(예: 단계별 메타인지 질문)가 보강되면 더 효과적일 것으로 보임.",
+    "대화 말미에서 피로감, 산만함이 노출되어 에너지 관리(짧은 정리 or 소그룹 활동 등) 및 동기부여 방식의 추가 적용을 고려할 수 있음."
+  ],
+  "highlights": [
+    {
+      "timestamp": "13:23",
+      "teacherText": "1 fourth, 1 fourth times 1 third. Thank you, Michael. Were you listening?",
+      "studentText": "Yes. 14 times 1 third. It's 1 12, 1 12th.",
+      "reason": "학생이 분수의 곱셈을 올바르게 적용하여 문제를 해결하고, 교사는 바로 긍정적 피드백과 반복 질문을 통해 이해를 점검함. 이 과정에서 개념 적용의 정확성과 즉각적 피드백이 뚜렷하게 드러남.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "31:09",
+      "teacherText": "To make it more easier. What does that mean? Because without doing that, we can. We can solve this.",
+      "studentText": "Yeah. Just add.",
+      "reason": "학생이 통분의 필요성을 인식하는 데 혼란을 보이자, 교사가 비판적 사고를 유도하는 질문으로 '왜 통분이 필요한지', '어떻게 계산 방법이 진행되는지'를 직접 탐색하도록 유도함. 오류 인식 및 논리적 설명 명료화라는 점에서 우수함.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "25:12",
+      "teacherText": "Okay, Abby, you got the answer. How did you solve this?",
+      "studentText": "Oh, can you please explain using words?",
+      "reason": "학생이 문제 풀이 결과를 말로 설명하도록 유도함으로써, 단순한 정답 확인을 넘어 과정 중심의 이해를 강조함. 학생 자신의 언어로 풀이 과정을 설명함으로써 자기주도적 학습 역량을 기르고, 수업 내 상호작용의 질을 높임.",
+      "type": "적극참여"
+    },
+    {
+      "timestamp": "20:21",
+      "teacherText": "I mean, like, without using multiplication. How can you explain this? 4 divided by 1/5? What does that even mean? 4 divided by one fifth?",
+      "studentText": "Yeah, 4 times 5.",
+      "reason": "교사가 '나눗셈의 개념적 의미'를 언어적으로 이해하도록 유도하고, 학생이 곱셈을 사용한 연산적 해결 뿐 아니라 의미적 해석에도 도전하게 만듦.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "42:33",
+      "teacherText": "24, I guess. So let's change them to 24. So it's 2 and what over 24 is it?",
+      "studentText": "Minus. What is it? What is the second one?",
+      "reason": "복잡한 분수 계산의 과정에서 서로 논의하며 최소공배수, 빼는 연산이 왜 필요한지 교사-학생이 적극적으로 탐색함. 실전적인 문제해결력 신장에 기여함.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "17:41",
+      "teacherText": "20. What?",
+      "studentText": "20 bowls of soup.",
+      "reason": "학생이 문제의 단위를 정확히 짚어내고, 교사가 단위의 중요성을 재차 강조함. 단순 계산 결과가 아닌, 맥락에 맞는 결과 완성의 중요성을 실천함.",
+      "type": "긍정피드백"
+    }
+  ],
+  "title": "test",
+  "teacherId": "이선생",
+  "uploadDate": "2026-01-12T04:59:08.374Z",
+  "filename": "Test_1.mp4",
+  "fileSize": 121980576,
+  "videoDuration": "00:48:04.04"
+}

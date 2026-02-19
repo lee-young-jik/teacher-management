@@ -1,0 +1,55 @@
+﻿{
+  "scores": {
+    "학생_참여도": 18,
+    "개념_설명": 19,
+    "피드백": 18,
+    "수업_체계성": 18,
+    "상호작용": 19
+  },
+  "우수점": [
+    "학생들이 개념 이해 과정에 지속적으로 질문(“How many cookies did they eat?”, “What is the equation for this?” 등) 및 자신의 풀이 과정을 말하는 등 주도적으로 참여함",
+    "교사가 수차례에 걸쳐 핵심 개념(분수의 나눗셈, 대분수 계산 등)을 명확하게 설명하고, 관련 사례를 들어가며 구체적인 수학적 원리를 반복 설명함",
+    "실수(예: 단위 누락, 계산방법 오류)에 대해 학생이 답하거나 혼란을 드러내면 즉시 긍정적이고 정확한 피드백을 제공하며 올바른 사고과정으로 안내함"
+  ],
+  "개선점": [
+    "학생의 계산 또는 풀이 과정에서 오류가 반복적으로 발생할 때 정답 제시에만 머무르지 말고, 오개념의 원인을 더 깊이 탐색하거나 학생 스스로 논리적으로 잘못을 진단할 수 있도록 유도하는 질문이 더 추가되면 좋음",
+    "학생 일부가 화면 공유, 교사용 화이트보드 시야 문제 등 기술적 문제를 여러 차례 언급하였으므로, 수업 전 전체 시스템 체크 등 기술관리 방안이 보완될 필요가 있음",
+    "수업 후반 집중력이 떨어지는 학생들의 분위기를 전환할 다양한 활동, 짧은 휴식, 동기부여 요소가 더해지면 더욱 효과적 수업이 될 수 있음"
+  ],
+  "highlights": [
+    {
+      "timestamp": "01:55",
+      "teacherText": "“Okay. It’s just eight divided by three. Right. Which is equal to eight thirds, right? Huh? This question is showing you dividing into thirds. Do you get it?”",
+      "studentText": "“Eight divided by three.”",
+      "reason": "교사가 학생의 수식 표현을 즉각 확인하고, 분수의 나눗셈 개념을 구체적 사례(쿠키 나누기)로 연결하며 학생의 오개념을 빠르게 짚어주고 있다.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "13:24",
+      "teacherText": "“One fourth times one third. Thank you, Michael. Were you listening?”",
+      "studentText": "“Ah. 14 times 1 third. Yes. 14 times 1 third.”",
+      "reason": "교사가 학생의 부분적 오류를 긍정적 피드백(“Thank you, Michael”)으로 교정하고, 하나의 문제 풀이를 여러 학생의 언어로 확인하는 과정이 잘 드러남.",
+      "type": "긍정피드백"
+    },
+    {
+      "timestamp": "36:45",
+      "teacherText": "“And that is 1 and 1 over 12 pounds more than the average. Right. And what is the question? The question’s asking you to get the average. Right… For example, Abby has three cookies. Okay. And that is three less than Jasmine’s. Who has more?... You just heard the word less and you just thought it’s minus, right?... You have to understand the situation. Do you get it?”",
+      "studentText": "“Who has more? More? ... Jasmine, right.”",
+      "reason": "학생이 언어에 얽매인 잘못된 수식화를 할 때, 교사가 맥락적 사고를 예시(쿠키 수)로 바꿔가며 언어→수학적 의미 연결을 강조, 비판적 사고력과 기초 개념 이해를 성공적으로 유도함.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "17:41",
+      "teacherText": "“Oh, very good. So, wait, I wrote in the wrong place, which. It says, which numbers should you divide to solve the problems? Right. So you first have to write four divided by 1 1/5. Right. And it says, write and solve an equation. Then that’s the time you do this. Right...”",
+      "studentText": "“20 bowls of soup.”",
+      "reason": "풀이 식에서 단위의 중요성(“20 what?”→“20 bowls of soup”)을 학생 스스로 인지하게 하고, 과정적 사고 순서에 대한 인식을 심어줌",
+      "type": "긍정피드백"
+    }
+  ],
+  "title": "test수업",
+  "teacherId": "이다혜",
+  "uploadDate": "2025-09-09T08:41:52.905Z",
+  "filename": "Test_1.mp4",
+  "fileSize": 121980576,
+  "videoDuration": "00:48:04.04"
+}

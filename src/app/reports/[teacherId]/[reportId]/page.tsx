@@ -26,6 +26,7 @@ import {
 import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useLanguage } from '../../../../../contexts/LanguageContext';
 
 // Icons
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -39,23 +40,22 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import StarIcon from '@mui/icons-material/Star';
 
-const GradientBackground = styled(Box)`
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+const PageBackground = styled(Box)`
+  background: #f8f9fa;
   min-height: 100vh;
   position: relative;
 `;
 
 const StyledCard = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
+  background: #ffffff;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
   
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -104,12 +104,15 @@ interface AnalysisData {
     };
     
     strengths: string[];
+    strengths_en?: string[];
     improvements: string[];
+    improvements_en?: string[];
     key_moments: Array<{
       timestamp: string;
       teacherText: string;
       studentText: string;
       reason: string;
+      reason_en?: string;
       type: string;
     }>;
   };
@@ -118,67 +121,156 @@ interface AnalysisData {
 export default function ReportPage() {
   const params = useParams();
   const router = useRouter();
+  const { t, language } = useLanguage();
   const [analysisData, setAnalysisData] = useState<AnalysisData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [tabValue, setTabValue] = useState(0);
   const [scoreHistory, setScoreHistory] = useState<any[]>([]);
+  const [translating, setTranslating] = useState(false);
+  const [translatedData, setTranslatedData] = useState<{
+    strengths: string[];
+    improvements: string[];
+    reasons: string[];
+  } | null>(null);
+
+  // 카테고리 이름 번역
+  const getCategoryName = (category: string) => {
+    const map: { [key: string]: string } = {
+      'engagement': t('category.engagement'),
+      'clarity': t('category.clarity'),
+      'interaction': t('category.interaction'),
+      'time_management': t('category.timeManagement'),
+      'feedback_quality': t('category.feedbackQuality')
+    };
+    return map[category] || category;
+  };
+
+  // 실시간 번역
+  useEffect(() => {
+    const translateContent = async () => {
+      console.log('🔄 Translation check:', { language, hasData: !!analysisData });
+      
+      if (!analysisData || language === 'ko') {
+        setTranslatedData(null);
+        return;
+      }
+
+      // 영어 데이터가 이미 있는 경우 (빈 배열이 아닌지 확인)
+      const hasEnglishData = 
+        analysisData.analysis?.strengths_en && 
+        analysisData.analysis.strengths_en.length > 0 &&
+        analysisData.analysis?.improvements_en &&
+        analysisData.analysis.improvements_en.length > 0;
+      
+      console.log('📊 Has English data:', hasEnglishData, {
+        strengths_en: analysisData.analysis?.strengths_en?.length,
+        improvements_en: analysisData.analysis?.improvements_en?.length
+      });
+      
+      if (hasEnglishData) {
+        setTranslatedData(null);
+        return;
+      }
+
+      setTranslating(true);
+      try {
+        const strengths = analysisData.analysis?.strengths || [];
+        const improvements = analysisData.analysis?.improvements || [];
+        const reasons = analysisData.analysis?.key_moments?.map(m => m.reason) || [];
+
+        console.log('📝 Translating:', { 
+          strengthsCount: strengths.length, 
+          improvementsCount: improvements.length,
+          reasonsCount: reasons.length 
+        });
+
+        const textsToTranslate: string[] = [];
+        textsToTranslate.push(...strengths, ...improvements, ...reasons);
+
+        if (textsToTranslate.length === 0) {
+          setTranslating(false);
+          return;
+        }
+
+        console.log('🌐 Calling translate API...');
+        const response = await fetch('/api/translate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            texts: textsToTranslate,
+            targetLanguage: 'en'
+          })
+        });
+
+        const result = await response.json();
+        console.log('✅ Translation result:', result);
+        
+        if (result.success && result.translations) {
+          const translations = result.translations;
+          let idx = 0;
+
+          const translated = {
+            strengths: translations.slice(idx, idx + strengths.length),
+            improvements: translations.slice(idx += strengths.length, idx + improvements.length),
+            reasons: translations.slice(idx += improvements.length, idx + reasons.length)
+          };
+          
+          console.log('💾 Setting translated data:', translated);
+          setTranslatedData(translated);
+        }
+      } catch (err) {
+        console.error('❌ Translation error:', err);
+      } finally {
+        setTranslating(false);
+      }
+    };
+
+    translateContent();
+  }, [language, analysisData]);
 
   useEffect(() => {
     const loadReport = async () => {
       try {
         const { teacherId, reportId } = params;
         
-        // 원본 구조에서 transcript.json과 analysis.json 로드
-        let transcriptData = null;
+        // API에서 분석 데이터 로드 (transcript 포함)
         let analysisData = null;
         
         try {
-          // 원본 구조: /reports/teacherId/reportId/transcript.json
-          const transcriptResponse = await fetch(`/reports/${teacherId}/${reportId}/transcript.json`);
-          if (transcriptResponse.ok) {
-            transcriptData = await transcriptResponse.json();
-          }
-          
-          // 원본 구조: /reports/teacherId/reportId/analysis.json  
-          const analysisResponse = await fetch(`/reports/${teacherId}/${reportId}/analysis.json`);
-          if (analysisResponse.ok) {
-            analysisData = await analysisResponse.json();
-          }
-        } catch (error) {
-          console.log('Direct file load failed, trying API fallback...');
-        }
-        
-        // API 폴백 (원본 분석 API 사용)
-        if (!transcriptData || !analysisData) {
           const response = await fetch(`/api/reports/${teacherId}/${reportId}/analysis`);
           if (!response.ok) {
             throw new Error('분석 결과를 찾을 수 없습니다.');
           }
-          const apiData = await response.json();
+          analysisData = await response.json();
+        } catch (error) {
+          console.log('API load failed, trying direct file load...');
           
-          // 원본 API 데이터 형식 그대로 사용
-          analysisData = apiData;
-          
-          // transcript 데이터는 별도 API에서 가져오기 시도
+          // Fallback: 로컬 파일에서 로드
           try {
-            const transcriptApiResponse = await fetch(`/api/reports/${teacherId}/${reportId}/transcript`);
-            if (transcriptApiResponse.ok) {
-              transcriptData = await transcriptApiResponse.json();
+            const analysisResponse = await fetch(`/reports/${teacherId}/${reportId}/analysis.json`);
+            if (analysisResponse.ok) {
+              analysisData = await analysisResponse.json();
             }
           } catch (err) {
-            console.log('Transcript API failed, using default');
-            transcriptData = {
-              utterances: [
-                {
-                  speaker: "A",
-                  text: "수업 대화 내용을 불러오는 중...",
-                  start: 0,
-                  end: 1000,
-                  confidence: 0.95
-                }
-              ]
-            };
+            console.error('Failed to load analysis data:', err);
+            throw new Error('분석 결과를 찾을 수 없습니다.');
+          }
+        }
+        
+        // transcript 데이터 추출 (DB에서 가져온 것 또는 fallback)
+        let transcriptData = analysisData.transcript || null;
+        
+        // transcript가 없으면 로컬 파일에서 시도
+        if (!transcriptData || !transcriptData.utterances || transcriptData.utterances.length === 0) {
+          try {
+            const transcriptResponse = await fetch(`/reports/${teacherId}/${reportId}/transcript.json`);
+            if (transcriptResponse.ok) {
+              transcriptData = await transcriptResponse.json();
+            }
+          } catch (err) {
+            console.log('No transcript data available');
+            transcriptData = null;
           }
         }
         
@@ -215,33 +307,42 @@ export default function ReportPage() {
             categories: {
               engagement: { 
                 score: (analysisData.scores as any)?.학생_참여도 || 16, 
-                feedback: "학생들과의 상호작용이 활발했습니다." 
+                feedback: t('feedback.engagement')
               },
               clarity: { 
                 score: (analysisData.scores as any)?.개념_설명 || 17, 
-                feedback: "설명이 명확하고 이해하기 쉬웠습니다." 
+                feedback: t('feedback.clarity')
               },
               interaction: { 
                 score: (analysisData.scores as any)?.상호작용 || 15, 
-                feedback: "적절한 질문과 피드백이 있었습니다." 
+                feedback: t('feedback.interaction')
               },
               time_management: { 
                 score: (analysisData.scores as any)?.수업_체계성 || 16, 
-                feedback: "시간 관리가 체계적이었습니다." 
+                feedback: t('feedback.timeManagement')
               },
               feedback_quality: { 
                 score: (analysisData.scores as any)?.피드백 || 14, 
-                feedback: "학생들에게 적절한 피드백을 제공했습니다." 
+                feedback: t('feedback.feedbackQuality')
               }
             },
             
             strengths: analysisData.우수점 || ["체계적인 진행", "명확한 설명"],
+            strengths_en: (analysisData.우수점_en && analysisData.우수점_en.length > 0) 
+              ? analysisData.우수점_en 
+              : [],  // 빈 배열: 실시간 번역 트리거
             improvements: analysisData.개선점 || ["더 많은 상호작용 필요"],
+            improvements_en: (analysisData.개선점_en && analysisData.개선점_en.length > 0) 
+              ? analysisData.개선점_en 
+              : [],  // 빈 배열: 실시간 번역 트리거
             key_moments: (analysisData.highlights || []).map((h: any) => ({
               timestamp: h.timestamp || "00:00",
               teacherText: h.teacherText || "",
               studentText: h.studentText || "",
               reason: h.reason || "중요한 학습 순간",
+              reason_en: (h.reason_en && h.reason_en.length > 0) 
+                ? h.reason_en 
+                : "",  // 빈 문자열: 실시간 번역 트리거
               type: h.type || "상호작용"
             }))
           }
@@ -578,20 +679,20 @@ export default function ReportPage() {
 
   if (loading) {
     return (
-      <GradientBackground>
+      <PageBackground>
         <Container maxWidth="lg" sx={{ pt: 8, display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
-          <Box sx={{ textAlign: 'center', color: 'white' }}>
-            <CircularProgress size={60} sx={{ color: 'white', mb: 2 }} />
-            <Typography variant="h6">분석 결과를 불러오는 중...</Typography>
+          <Box sx={{ textAlign: 'center' }}>
+            <CircularProgress size={60} sx={{ color: '#667eea', mb: 2 }} />
+            <Typography variant="h6" color="text.secondary">분석 결과를 불러오는 중...</Typography>
           </Box>
         </Container>
-      </GradientBackground>
+      </PageBackground>
     );
   }
 
   if (error) {
     return (
-      <GradientBackground>
+      <PageBackground>
         <Container maxWidth="lg" sx={{ pt: 8 }}>
           <Alert severity="error" sx={{ mb: 4 }}>
             {error}
@@ -645,12 +746,12 @@ export default function ReportPage() {
               
               router.back();
             }}
-            sx={{ bgcolor: 'white', color: 'primary.main' }}
+            sx={{ bgcolor: '#667eea', color: 'white' }}
           >
             돌아가기
           </Button>
         </Container>
-      </GradientBackground>
+      </PageBackground>
     );
   }
 
@@ -662,12 +763,22 @@ export default function ReportPage() {
   const overallPercentage = getScorePercentage(overallScore);
 
   return (
-    <GradientBackground>
+    <PageBackground>
       <Container maxWidth="lg" sx={{ pt: 4, pb: 8 }}>
         {/* 헤더 */}
-        <Box sx={{ mb: 4, display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Box sx={{ 
+          mb: 4, 
+          display: 'flex', 
+          alignItems: 'center', 
+          gap: 3,
+          p: 3,
+          bgcolor: 'white',
+          borderRadius: 3,
+          boxShadow: '0 2px 12px rgba(0, 0, 0, 0.06)',
+          border: '1px solid rgba(0, 0, 0, 0.06)'
+        }}>
           <Button
-            variant="contained"
+            variant="outlined"
             startIcon={<ArrowBackIcon />}
             onClick={() => {
               // 현재 리포트 정보를 localStorage에 저장 (동일한 로직)
@@ -713,18 +824,21 @@ export default function ReportPage() {
               router.back();
             }}
             sx={{
-              bgcolor: 'rgba(255,255,255,0.2)',
-              color: 'white',
-              '&:hover': { bgcolor: 'rgba(255,255,255,0.3)' }
+              borderColor: '#667eea',
+              color: '#667eea',
+              '&:hover': { 
+                borderColor: '#5a6fd6',
+                bgcolor: 'rgba(102, 126, 234, 0.04)'
+              }
             }}
           >
             돌아가기
           </Button>
           <Box>
-            <Typography variant="h4" sx={{ color: 'white', fontWeight: 'bold' }}>
+            <Typography variant="h4" sx={{ color: '#1a1a2e', fontWeight: 700 }}>
               {analysisData.title}
             </Typography>
-            <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.8)' }}>
+            <Typography variant="subtitle1" sx={{ color: '#666' }}>
               업로드: {new Date(analysisData.uploadDate).toLocaleDateString('ko-KR')}
               {analysisData.videoDuration && (
                 <> | 재생시간: {analysisData.videoDuration}</>
@@ -739,15 +853,23 @@ export default function ReportPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <Card sx={{ mb: 4, background: `linear-gradient(135deg, ${getScoreColor(overallScore)}, ${getScoreColor(overallScore)}DD)` }}>
-            <CardContent sx={{ textAlign: 'center', py: 4, color: 'white' }}>
-              <Typography variant="h1" fontWeight="bold" sx={{ mb: 2 }}>
-                {overallPercentage}점
+          <Card sx={{ 
+            mb: 4, 
+            background: 'white',
+            border: `3px solid ${getScoreColor(overallScore)}`,
+            boxShadow: `0 4px 20px ${getScoreColor(overallScore)}25`
+          }}>
+            <CardContent sx={{ textAlign: 'center', py: 5 }}>
+              <Typography variant="h1" fontWeight="bold" sx={{ mb: 2, color: getScoreColor(overallScore) }}>
+                {overallPercentage}{t('points')}
               </Typography>
-              <Typography variant="h5" sx={{ mb: 2 }}>
-                {overallPercentage >= 90 ? '탁월' : overallPercentage >= 80 ? '우수' : overallPercentage >= 70 ? '양호' : '보통'}
+              <Typography variant="h5" sx={{ mb: 2, color: '#333', fontWeight: 600 }}>
+                {overallPercentage >= 90 ? t('report.excellent') : 
+                 overallPercentage >= 80 ? t('report.good') : 
+                 overallPercentage >= 70 ? t('report.satisfactory') : 
+                 t('report.average')}
               </Typography>
-              <Typography variant="h6" sx={{ opacity: 0.9 }}>
+              <Typography variant="h6" sx={{ color: '#666' }}>
                 전반적으로 체계적이고 명확한 수업 진행을 보여주었습니다.
               </Typography>
             </CardContent>
@@ -770,7 +892,7 @@ export default function ReportPage() {
                       {Math.round((analysisData.analysis?.teacher_speaking_time || 0) / 60)}분
                     </Typography>
                     <Typography variant="h6" color="text.secondary">
-                      교사 발화 시간
+                      {t('report.teacherSpeaking')}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -792,7 +914,7 @@ export default function ReportPage() {
                       {Math.round((analysisData.analysis?.student_speaking_time || 0) / 60)}분
                     </Typography>
                     <Typography variant="h6" color="text.secondary">
-                      학생 발화 시간
+                      {t('report.studentSpeaking')}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -814,7 +936,7 @@ export default function ReportPage() {
                       {analysisData.analysis?.interaction_count || 0}회
                     </Typography>
                     <Typography variant="h6" color="text.secondary">
-                      상호작용 횟수
+                      {t('report.interactions')}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -836,7 +958,7 @@ export default function ReportPage() {
                       {analysisData.analysis?.positive_feedback_count || 0}회
                     </Typography>
                     <Typography variant="h6" color="text.secondary">
-                      긍정적 피드백
+                      {t('report.positiveFeedback')}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -846,33 +968,42 @@ export default function ReportPage() {
         </Grid>
 
         {/* 탭 네비게이션 */}
-        <Box sx={{ mb: 4 }}>
+        <Box sx={{ 
+          mb: 4, 
+          bgcolor: 'white', 
+          borderRadius: 2, 
+          p: 1,
+          boxShadow: '0 2px 12px rgba(0, 0, 0, 0.06)',
+          border: '1px solid rgba(0, 0, 0, 0.06)'
+        }}>
           <Tabs 
             value={tabValue} 
             onChange={handleTabChange}
             sx={{ 
-              borderBottom: 1, 
-              borderColor: 'divider',
               '& .MuiTabs-indicator': {
-                backgroundColor: '#2196F3'
+                backgroundColor: '#667eea',
+                height: 3,
+                borderRadius: 2
               }
             }}
           >
             <Tab 
               label="📊 상세 분석" 
               sx={{ 
-                fontWeight: 'bold',
+                fontWeight: 600,
+                fontSize: '1rem',
                 '&.Mui-selected': {
-                  color: '#2196F3'
+                  color: '#667eea'
                 }
               }} 
             />
             <Tab 
               label="📈 점수 추이" 
               sx={{ 
-                fontWeight: 'bold',
+                fontWeight: 600,
+                fontSize: '1rem',
                 '&.Mui-selected': {
-                  color: '#2196F3'
+                  color: '#667eea'
                 }
               }} 
             />
@@ -894,7 +1025,7 @@ export default function ReportPage() {
                 <CardContent>
                   <Typography variant="h6" fontWeight="bold" sx={{ mb: 3, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <AssessmentIcon sx={{ mr: 2, color: 'primary.main' }} />
-                    📊 영역별 평가 결과
+                    📊 {t('report.areaEvaluation')}
                   </Typography>
                   
                   {/* 레이더 차트와 점수 표시를 나란히 배치 */}
@@ -923,14 +1054,10 @@ export default function ReportPage() {
                           <Box key={category} sx={{ mb: 2, p: 2, bgcolor: 'rgba(0,0,0,0.02)', borderRadius: 2 }}>
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
                               <Typography variant="subtitle1" fontWeight="bold">
-                                {category === 'engagement' ? '참여도' :
-                                 category === 'clarity' ? '명확성' :
-                                 category === 'interaction' ? '상호작용' :
-                                 category === 'time_management' ? '시간관리' :
-                                 category === 'feedback_quality' ? '피드백' : category}
+                                {getCategoryName(category)}
                               </Typography>
                               <Typography variant="h6" sx={{ color: getScoreColor(data.score), fontWeight: 'bold' }}>
-                                {getScorePercentage(data.score)}점
+                                {getScorePercentage(data.score)}{t('points')}
                               </Typography>
                             </Box>
                             <LinearProgress
@@ -971,10 +1098,13 @@ export default function ReportPage() {
               <Card sx={{ height: '100%' }}>
                 <CardContent>
                   <Typography variant="h6" fontWeight="bold" sx={{ mb: 3, color: 'success.main' }}>
-                    🌟 주요 강점
+                    🌟 {language === 'en' ? 'Key Strengths' : '주요 강점'} {translating && language === 'en' && '(Translating...)'}
                   </Typography>
                   <List>
-                    {(analysisData.analysis?.strengths || []).map((strength, index) => (
+                    {(language === 'en' 
+                      ? (translatedData?.strengths || analysisData.analysis?.strengths_en || analysisData.analysis?.strengths || [])
+                      : (analysisData.analysis?.strengths || [])
+                    ).map((strength, index) => (
                       <ListItem key={index}>
                         <ListItemIcon>
                           <CheckCircleIcon color="success" />
@@ -997,10 +1127,13 @@ export default function ReportPage() {
               <Card sx={{ height: '100%' }}>
                 <CardContent>
                   <Typography variant="h6" fontWeight="bold" sx={{ mb: 3, color: 'warning.main' }}>
-                    💡 개선 제안
+                    💡 {language === 'en' ? 'Suggestions for Improvement' : '개선 제안'} {translating && language === 'en' && '(Translating...)'}
                   </Typography>
                   <List>
-                    {(analysisData.analysis?.improvements || []).map((improvement, index) => (
+                    {(language === 'en' 
+                      ? (translatedData?.improvements || analysisData.analysis?.improvements_en || analysisData.analysis?.improvements || [])
+                      : (analysisData.analysis?.improvements || [])
+                    ).map((improvement, index) => (
                       <ListItem key={index}>
                         <ListItemIcon>
                           <TrendingUpIcon color="primary" />
@@ -1072,7 +1205,7 @@ export default function ReportPage() {
                           
                           {/* 의미/이유 */}
                           <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
-                            <strong>교육적 의미:</strong> {moment.reason}
+                            <strong>{language === 'en' ? 'Educational Significance:' : '교육적 의미:'}</strong> {language === 'en' ? (translatedData?.reasons?.[index] || moment.reason_en || moment.reason) : moment.reason}
                           </Typography>
                         </Paper>
                       </Grid>
@@ -1095,33 +1228,48 @@ export default function ReportPage() {
           <Card>
             <CardContent>
               <Typography variant="h6" fontWeight="bold" sx={{ mb: 3 }}>
-                📝 수업 대화 전문
+                📝 {language === 'en' ? 'Class Transcript' : '수업 대화 전문'}
               </Typography>
               
               <Paper sx={{ p: 3, bgcolor: '#f5f5f5', maxHeight: 400, overflow: 'auto' }}>
-                {analysisData.transcript?.utterances?.map((utterance, index) => (
-                  <Box key={index} sx={{ mb: 2 }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                      <Chip 
-                        label={utterance.speaker === 'A' ? '교사' : '학생'}
-                        color={utterance.speaker === 'A' ? 'primary' : 'secondary'}
-                        size="small"
-                      />
-                      <Typography variant="caption" color="text.secondary">
-                        {Math.floor(utterance.start / 60)}:{String(Math.floor(utterance.start % 60)).padStart(2, '0')}
+                {analysisData.transcript?.utterances && analysisData.transcript.utterances.length > 0 ? (
+                  analysisData.transcript.utterances.map((utterance, index) => (
+                    <Box key={index} sx={{ mb: 2 }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                        <Chip 
+                          label={utterance.speaker === 'A' ? (language === 'en' ? 'Teacher' : '교사') : (language === 'en' ? 'Student' : '학생')}
+                          color={utterance.speaker === 'A' ? 'primary' : 'secondary'}
+                          size="small"
+                        />
+                        <Typography variant="caption" color="text.secondary">
+                          {Math.floor(utterance.start / 60)}:{String(Math.floor(utterance.start % 60)).padStart(2, '0')}
+                        </Typography>
+                        <Typography variant="caption" color="text.secondary">
+                          ({language === 'en' ? 'Confidence' : '신뢰도'}: {Math.round(utterance.confidence * 100)}%)
+                        </Typography>
+                      </Box>
+                      <Typography variant="body2">
+                        {utterance.text}
                       </Typography>
-                      <Typography variant="caption" color="text.secondary">
-                        (신뢰도: {Math.round(utterance.confidence * 100)}%)
-                      </Typography>
+                      {index < analysisData.transcript.utterances.length - 1 && (
+                        <Divider sx={{ mt: 2 }} />
+                      )}
                     </Box>
-                    <Typography variant="body2">
-                      {utterance.text}
+                  ))
+                ) : (
+                  <Box sx={{ textAlign: 'center', py: 4 }}>
+                    <Typography variant="body1" color="text.secondary">
+                      {language === 'en' 
+                        ? 'Transcript data is not available for this report.' 
+                        : '이 보고서에는 수업 대화 전문 데이터가 없습니다.'}
                     </Typography>
-                    {index < (analysisData.transcript?.utterances?.length || 0) - 1 && (
-                      <Divider sx={{ mt: 2 }} />
-                    )}
+                    <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                      {language === 'en'
+                        ? 'Transcript data is only available for newly uploaded videos.'
+                        : '새로 업로드된 영상에만 대화 전문 데이터가 포함됩니다.'}
+                    </Typography>
                   </Box>
-                ))}
+                )}
               </Paper>
             </CardContent>
           </Card>
@@ -1135,6 +1283,6 @@ export default function ReportPage() {
         )}
 
       </Container>
-    </GradientBackground>
+    </PageBackground>
   );
 } 

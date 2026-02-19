@@ -1,0 +1,55 @@
+﻿{
+  "scores": {
+    "학생_참여도": 18,
+    "개념_설명": 17,
+    "피드백": 16,
+    "수업_체계성": 16,
+    "상호작용": 18
+  },
+  "우수점": [
+    "학생의 다양한 오답/선행 답변에 대해 교사가 끈기 있게 다시 질문하며 개념 유도(예: 분수 덧셈, 뺄셈 개념 반복 설명).",
+    "수업 내내 학생의 발언 비율이 높으며, 학생이 적극적으로 질문하고 의견을 표현할 수 있는 분위기가 조성됨.",
+    "수학적 사고과정을 지속적으로 언어로 표현하도록 유도(“설명해줘”, “왜 그렇게 했어?” 등 질문으로 논리적 언어 표현 강조)."
+  ],
+  "개선점": [
+    "일부 구간에서 학생 질문이나 설명 요청에 비해 교사의 직접적인 설명 및 정답 유도가 다소 길어져, 자기 주도적 탐색 유도가 다소 약화될 수 있음.",
+    "실물 자료(화면 공유, 판서 등) 활용 시 학생의 화면 미표시, 기술적인 혼선(“못 보여요”, “못 들려요” 등)에 대한 빠른 대응이나 대체 설명이 더 필요함.",
+    "복수 학생의 발언 기회 균형 및 각 단계별 정리(핵심 요약, 결과 정리 등)가 더 강화되면 전체 수업 구조가 선명해질 수 있음."
+  ],
+  "highlights": [
+    {
+      "timestamp": "13:23",
+      "teacherText": "\"1 fourth, 1 fourth times 1 third. Thank you, Michael. Were you listening?\"",
+      "studentText": "\"Yes. 14 times 1 third... It's 1 12, 1 12th.\"",
+      "reason": "학생이 분수의 곱셈 원리를 스스로 식으로 표현하고, 교사는 즉각적으로 학생을 칭찬과 함께 확인함. 개념이해와 긍정피드백이 결합된 모범적 상호작용.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "40:09",
+      "teacherText": "\"You just heard the word less and you just thought it's minus, right?... You have to understand the situation. Question. Do you get it? Yes. So can you please resolve this question?\"",
+      "studentText": "\"So that means 2 fifth. 8 minus 1.\"",
+      "reason": "단순히 단어(less/more)에 의존하는 기계적 적용이 아니라, 실제 맥락을 이해하고 적용하도록 안내. 논리적 사고 및 수학적 언어 이해 향상에 도움이 되는 예시적 대화.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "17:41",
+      "teacherText": "\"20. What?\"",
+      "studentText": "\"20 bowls of soup.\"",
+      "reason": "학생이 답만이 아니라 단위를 함께 인식하도록 강조하고, 정답을 학생이 완성하여 성취 경험을 느끼게 함.",
+      "type": "긍정피드백"
+    },
+    {
+      "timestamp": "31:05",
+      "teacherText": "\"Okay. Why? Michael, why do you think she made this?\"",
+      "studentText": "\"To make it more easier.\"",
+      "reason": "교사가 학생의 계산과정을 묻고, 학생이 (비록 답이 완전 정확하진 않더라도) 자신의 의도를 설명함으로써 수학적 소통과 사고 과정 노출이 자연스럽게 이뤄짐.",
+      "type": "적극참여"
+    }
+  ],
+  "title": "Test_1",
+  "teacherId": "이영직",
+  "uploadDate": "2026-01-12T06:35:12.567Z",
+  "filename": "Test_1.mp4",
+  "fileSize": 121980576,
+  "videoDuration": "00:48:04.04"
+}

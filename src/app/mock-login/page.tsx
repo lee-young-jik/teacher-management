@@ -50,7 +50,7 @@ export default function MockLogin() {
           label="이메일"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="teacher@test.com 또는 admin@test.com"
+          placeholder="youngjik@test.com 또는 admin@test.com"
         />
         
         <TextField
@@ -75,7 +75,7 @@ export default function MockLogin() {
         <Box sx={{ textAlign: 'center', mt: 2 }}>
           <Typography variant="body2" color="text.secondary">
             📝 <strong>테스트 계정:</strong><br/>
-            • teacher@test.com → 선생님 페이지<br/>
+            • youngjik@test.com / test1234 → 선생님 페이지<br/>
             • admin@test.com → 관리자 페이지
           </Typography>
         </Box>

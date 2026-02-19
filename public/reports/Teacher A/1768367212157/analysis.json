@@ -1,0 +1,61 @@
+﻿{
+  "scores": {
+    "학생_참여도": 18,
+    "개념_설명": 17,
+    "피드백": 19,
+    "수업_체계성": 16,
+    "상호작용": 18
+  },
+  "우수점": [
+    "학생들의 오개념(예: 'more'가 나오면 무조건 덧셈을 해야 한다는 생각)을 정확히 짚어내고 실생활 예시(쿠키 개수 비교)를 통해 논리적으로 교정함.",
+    "수학적 개념(분수의 나눗셈)을 추상적인 수식에만 가두지 않고, '피자 나누기'나 '조리법' 같은 실생활 문장제 문제(story problem)로 전환하여 사고력을 자극함.",
+    "학생이 답변을 틀리거나 중간에 포기하려 할 때(예: \"Not me\", \"I don't know\") 적절한 유도 질문과 긍정적인 격려를 통해 끝까지 정답에 도달하도록 함."
+  ],
+  "우수점_en": [
+    "Effectively identified and corrected students' misconceptions (e.g., assuming 'more' always indicates addition) by using relatable real-life examples like comparing cookies.",
+    "Successfully connected abstract mathematical concepts (division of fractions) to real-world scenarios such as sharing pizza and recipes, enhancing students' conceptual understanding.",
+    "Provided consistent encouragement and scaffolding when students struggled, ensuring they remained engaged and reached the correct solution through guided questioning."
+  ],
+  "개선점": [
+    "인터넷 연결 불안정으로 인한 음성 끊김(glitching)이나 화면 공유 문제가 수업 흐름을 일시적으로 방해하므로, 기술적 환경에 대한 사전 점검이 필요함.",
+    "수업 후반부에 학생이 피로감을 호소하거나 집중력이 흐트러지는 모습이 보이므로, 수업 시간 배분을 최적화하거나 중간에 짧은 환기 시간을 가질 필요가 있음.",
+    "숙제 분량을 정할 때 학생들의 학습 부담을 고려하여 조금 더 명확하고 실현 가능한 가이드를 제공하면 좋을 것임."
+  ],
+  "개선점_en": [
+    "Frequent technical issues such as audio glitching and screen-sharing problems disrupted the lesson flow; preemptive technical checks are recommended.",
+    "Students exhibited signs of fatigue and waning focus toward the end of the session, suggesting a need for better time management or short \"brain breaks.\"",
+    "When assigning homework, providing clearer and more balanced instructions would help manage student workload and expectations effectively."
+  ],
+  "highlights": [
+    {
+      "timestamp": "07:40",
+      "teacherText": "Okay, it's 10 divided by 1 third, which is. If it's divided by 1 third. How do we change this? 10?",
+      "studentText": "10 times 1 third... 10 times 3. 30. 30 people were there.",
+      "reason": "분수의 나눗셈을 곱셈으로 역수 취하는 과정을 학생이 스스로 사고하여 답을 도출하도록 유도함. 기계적인 계산이 아닌 의미 중심의 학습이 이루어짐.",
+      "reason_en": "The teacher guided the student to discover how to convert division by a fraction into multiplication by its reciprocal, fostering conceptual rather than rote learning.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "39:31",
+      "teacherText": "You just heard the word less and you just thought it's minus, right? Yeah, it's actually... You have to understand the situation. Question. Do you get it?",
+      "studentText": "Minus them? ... No, it's actually Jasmine. So that means 2 5/8 minus 1... Yes.",
+      "reason": "특정 키워드(more/less)에 의존해 연산 기호를 결정하는 학생의 고정관념을 깨고, 문제 상황 전체를 비판적으로 읽도록 지도함.",
+      "reason_en": "The teacher challenged the student's reliance on keywords like 'less' or 'more' to choose operations, teaching them to critically analyze the problem context instead.",
+      "type": "긍정피드백"
+    },
+    {
+      "timestamp": "20:59",
+      "teacherText": "4 divided by 1 fifth means how many one fifths are in four, right? Do you get it? How many one fifths are there in one?",
+      "studentText": "Five. ... Twenty.",
+      "reason": "나눗셈의 본질적인 의미(단위 분수가 전체에 몇 번 포함되는가)를 질문을 통해 스스로 깨닫게 하여 수학적 직관력을 높임.",
+      "reason_en": "By asking how many unit fractions exist within a whole, the teacher strengthened the student's mathematical intuition regarding the fundamental meaning of division.",
+      "type": "개념이해"
+    }
+  ],
+  "title": "test23",
+  "teacherId": "Teacher A",
+  "uploadDate": "2026-01-14T05:08:03.731Z",
+  "filename": "Test_1.mp4",
+  "fileSize": 121980576,
+  "videoDuration": "00:48:04.04"
+}

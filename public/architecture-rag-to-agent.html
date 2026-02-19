@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAG → Agent 아키텍처 확장</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+      background: #fff;
+      padding: 40px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 40px;
+      color: #333;
+    }
+    .architecture {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+    }
+    .section {
+      flex: 1;
+      border: 2px dashed #666;
+      border-radius: 12px;
+      padding: 24px;
+      background: #fafafa;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      padding: 8px 16px;
+      background: #333;
+      color: #fff;
+      border-radius: 6px;
+    }
+    .current .section-title {
+      background: #666;
+    }
+    .future .section-title {
+      background: #2196F3;
+    }
+    .box {
+      padding: 12px 16px;
+      border-radius: 8px;
+      text-align: center;
+      margin: 10px 0;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .user-box {
+      background: #E3F2FD;
+      border: 2px solid #1976D2;
+      color: #1565C0;
+    }
+    .rag-box {
+      background: #FFF3E0;
+      border: 2px solid #F57C00;
+      color: #E65100;
+    }
+    .llm-box {
+      background: #E8F5E9;
+      border: 2px solid #43A047;
+      color: #2E7D32;
+    }
+    .db-box {
+      background: #FCE4EC;
+      border: 2px solid #D81B60;
+      color: #AD1457;
+    }
+    .agent-box {
+      background: #E1F5FE;
+      border: 2px solid #0288D1;
+      color: #01579B;
+    }
+    .tools-box {
+      background: #F3E5F5;
+      border: 2px solid #8E24AA;
+      color: #6A1B9A;
+    }
+    .memory-box {
+      background: #FFFDE7;
+      border: 2px solid #FBC02D;
+      color: #F57F17;
+    }
+    .arrow {
+      text-align: center;
+      font-size: 24px;
+      color: #666;
+      margin: 8px 0;
+    }
+    .arrow-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: #2196F3;
+      font-weight: bold;
+    }
+    .sub-title {
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+      margin-top: 4px;
+    }
+    .flow-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .horizontal-flow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+    .small-box {
+      padding: 8px 12px;
+      font-size: 12px;
+      border-radius: 6px;
+    }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 10px 0;
+    }
+    .tool-item {
+      padding: 8px;
+      background: #F3E5F5;
+      border: 1px solid #8E24AA;
+      border-radius: 4px;
+      font-size: 11px;
+      text-align: center;
+      color: #6A1B9A;
+    }
+    .agent-core {
+      border: 3px solid #0288D1;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 10px 0;
+      background: linear-gradient(135deg, #E1F5FE 0%, #B3E5FC 100%);
+    }
+    .agent-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .loop-indicator {
+      position: relative;
+      text-align: center;
+      font-size: 11px;
+      color: #0288D1;
+      margin: 4px 0;
+    }
+    .bidirectional {
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">RAG + LLM → Agent 아키텍처 확장</div>
+    
+    <div class="architecture">
+      <!-- 현재 구조: RAG + GPT OSS 20B -->
+      <div class="section current">
+        <div class="section-title">현재 구조</div>
+        <div class="sub-title">RAG + GPT OSS 20B</div>
+        
+        <div class="flow-container">
+          <div class="box user-box">👤 사용자 질의</div>
+          <div class="arrow">↓</div>
+          
+          <div class="box rag-box">
+            <strong>RAG Pipeline</strong>
+            <div class="sub-title">Retrieval Augmented Generation</div>
+          </div>
+          
+          <div class="horizontal-flow">
+            <div class="arrow">↓</div>
+            <div class="box small-box db-box">Vector DB</div>
+          </div>
+          
+          <div class="box rag-box">
+            문서 검색 + 컨텍스트 구성
+          </div>
+          <div class="arrow">↓</div>
+          
+          <div class="box llm-box">
+            <strong>GPT OSS 20B</strong>
+            <div class="sub-title">오픈소스 LLM (20B params)</div>
+          </div>
+          <div class="arrow">↓</div>
+          
+          <div class="box user-box">📄 응답 생성</div>
+        </div>
+      </div>
+      
+      <!-- 화살표 -->
+      <div class="arrow-right">
+        <div>
+          <div>→</div>
+          <div style="font-size: 14px;">확장</div>
+        </div>
+      </div>
+      
+      <!-- 확장 구조: Agent -->
+      <div class="section future">
+        <div class="section-title">확장 구조</div>
+        <div class="sub-title">Agent Architecture</div>
+        
+        <div class="flow-container">
+          <div class="box user-box">👤 사용자 질의</div>
+          <div class="arrow">↓</div>
+          
+          <!-- Agent Core -->
+          <div class="agent-core">
+            <div style="text-align: center; font-weight: bold; margin-bottom: 12px; color: #01579B;">
+              🤖 Agent Controller
+            </div>
+            
+            <div class="agent-inner">
+              <div class="box agent-box">
+                <strong>Planning Module</strong>
+                <div class="sub-title">작업 분해 & 계획 수립</div>
+              </div>
+              
+              <div class="loop-indicator">
+                <span class="bidirectional">↻</span> 반복 실행 & 자기 검증
+              </div>
+              
+              <div class="box llm-box">
+                <strong>GPT OSS 20B</strong>
+                <div class="sub-title">추론 엔진</div>
+              </div>
+              
+              <div class="box memory-box">
+                <strong>Memory</strong>
+                <div class="sub-title">단기/장기 기억 관리</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="arrow bidirectional">↕</div>
+          
+          <!-- Tools -->
+          <div style="width: 100%;">
+            <div class="box tools-box" style="margin-bottom: 8px;">
+              <strong>Tools (도구)</strong>
+            </div>
+            <div class="tools-grid">
+              <div class="tool-item">🔍 RAG 검색</div>
+              <div class="tool-item">🌐 웹 검색</div>
+              <div class="tool-item">💻 코드 실행</div>
+              <div class="tool-item">📊 데이터 분석</div>
+              <div class="tool-item">📁 파일 처리</div>
+              <div class="tool-item">🔗 API 호출</div>
+            </div>
+          </div>
+          
+          <div class="arrow">↓</div>
+          <div class="box user-box">📄 최종 응답</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 범례 -->
+    <div style="margin-top: 40px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+      <div style="font-weight: bold; margin-bottom: 12px;">주요 확장 포인트:</div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; font-size: 13px;">
+        <div>
+          <strong>1. Planning</strong><br>
+          복잡한 작업을 단계별로 분해
+        </div>
+        <div>
+          <strong>2. Memory</strong><br>
+          대화 기록 및 학습 내용 유지
+        </div>
+        <div>
+          <strong>3. Tools</strong><br>
+          외부 도구 자율적 활용
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

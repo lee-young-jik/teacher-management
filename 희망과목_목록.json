@@ -1,0 +1,265 @@
+{
+  "total_count": 43,
+  "source_url": "https://www.cognitoforms.com/TeahyungKim/TA%EC%8B%A0%EC%B2%AD%EC%84%A4%EB%AC%B8",
+  "crawled_date": "2026-02-07",
+  "subjects": [
+    {
+      "code": "CSE2003_01",
+      "name": "컴퓨터프로그래밍I",
+      "schedule": "월-수 12:00~13:15",
+      "instructor": "김지환"
+    },
+    {
+      "code": "CSE2003_02",
+      "name": "컴퓨터프로그래밍I",
+      "schedule": "화-목 09:00~10:15",
+      "instructor": "이영민"
+    },
+    {
+      "code": "CSE2003_03",
+      "name": "컴퓨터프로그래밍I",
+      "schedule": "화-목 12:00~13:15",
+      "instructor": "이주호"
+    },
+    {
+      "code": "CSE3013_01",
+      "name": "소프트웨어개발도구및환경실습",
+      "schedule": "월 15:00~20:50",
+      "instructor": "문의현"
+    },
+    {
+      "code": "CSE3013_02",
+      "name": "소프트웨어개발도구및환경실습",
+      "schedule": "화 15:00~20:50",
+      "instructor": ""
+    },
+    {
+      "code": "CSE3013_03",
+      "name": "소프트웨어개발도구및환경실습",
+      "schedule": "수 15:00~20:50",
+      "instructor": ""
+    },
+    {
+      "code": "CSE3013_04",
+      "name": "소프트웨어개발도구및환경실습",
+      "schedule": "목 15:00~20:50",
+      "instructor": ""
+    },
+    {
+      "code": "CSE3013_05",
+      "name": "소프트웨어개발도구및환경실습",
+      "schedule": "금 15:00~20:50",
+      "instructor": ""
+    },
+    {
+      "code": "CSE3016_01",
+      "name": "컴퓨터공학실험II",
+      "schedule": "금 15:00~20:50",
+      "instructor": ""
+    },
+    {
+      "code": "CSE3030_01",
+      "name": "컴퓨터시스템개론",
+      "schedule": "화-목 13:30~14:45",
+      "instructor": "문의현"
+    },
+    {
+      "code": "CSE3030_02",
+      "name": "컴퓨터시스템개론",
+      "schedule": "화-목 10:30~11:45",
+      "instructor": "최재승"
+    },
+    {
+      "code": "CSE3080_01",
+      "name": "자료구조",
+      "schedule": "월-수 10:30~11:45",
+      "instructor": "양지훈"
+    },
+    {
+      "code": "CSE3080_02",
+      "name": "자료구조",
+      "schedule": "수-금 09:00~10:15",
+      "instructor": "장형수"
+    },
+    {
+      "code": "CSE3081_01",
+      "name": "알고리즘설계와분석",
+      "schedule": "월-수 10:30~11:45",
+      "instructor": "장형수"
+    },
+    {
+      "code": "CSE4010_01",
+      "name": "컴퓨터아키텍쳐",
+      "schedule": "수-금 13:30~14:45",
+      "instructor": "김주호"
+    },
+    {
+      "code": "CSE4010_02",
+      "name": "컴퓨터아키텍쳐",
+      "schedule": "화-목 13:30~14:45",
+      "instructor": "이혁준"
+    },
+    {
+      "code": "CSE4020_01",
+      "name": "SW 분석 및 설계",
+      "schedule": "수-금 13:30~14:45",
+      "instructor": "최수진"
+    },
+    {
+      "code": "CSE4022_01",
+      "name": "오픈소스를 이용한 SW 개발 실습",
+      "schedule": "수 15:00~20:50",
+      "instructor": "최수진"
+    },
+    {
+      "code": "CSE4050_01",
+      "name": "프로그래밍언어",
+      "schedule": "월-수 10:30~11:45",
+      "instructor": "낭종호"
+    },
+    {
+      "code": "CSE4100_01",
+      "name": "시스템프로그래밍",
+      "schedule": "화-목 15:00~16:15",
+      "instructor": "박성용"
+    },
+    {
+      "code": "CSE4100_02",
+      "name": "시스템프로그래밍",
+      "schedule": "화-목 10:30~11:45",
+      "instructor": "김영재"
+    },
+    {
+      "code": "CSE4110_01",
+      "name": "데이터베이스시스템",
+      "schedule": "월-수 12:00~13:15",
+      "instructor": "정성원"
+    },
+    {
+      "code": "CSE4116_01",
+      "name": "임베디드시스템소프트웨어",
+      "schedule": "화-목 15:00~16:15",
+      "instructor": "김영재"
+    },
+    {
+      "code": "CSE4130_01",
+      "name": "기초머신러닝",
+      "schedule": "화-목 13:30~14:45",
+      "instructor": "박운상"
+    },
+    {
+      "code": "CSE4130_02",
+      "name": "기초머신러닝",
+      "schedule": "월-수 12:00~13:15",
+      "instructor": "최준석"
+    },
+    {
+      "code": "CSE4170_01",
+      "name": "기초컴퓨터그래픽스",
+      "schedule": "화-목 12:00~13:15",
+      "instructor": "임인성"
+    },
+    {
+      "code": "CSE4175_01",
+      "name": "컴퓨터네트워크",
+      "schedule": "월-수 16:30~17:45",
+      "instructor": "소정민"
+    },
+    {
+      "code": "CSE4181_01",
+      "name": "SW경제성분석및창업",
+      "schedule": "화-목 09:00~10:15",
+      "instructor": "박수용"
+    },
+    {
+      "code": "CSE4186_01",
+      "name": "캡스톤디자인(캡스톤디자인)",
+      "schedule": "월 13:30~16:15",
+      "instructor": "손진호"
+    },
+    {
+      "code": "CSE4186_02",
+      "name": "캡스톤디자인(캡스톤디자인)",
+      "schedule": "금 10:30~13:15",
+      "instructor": "장두성"
+    },
+    {
+      "code": "CSE4187_01",
+      "name": "산학프로젝트(캡스톤디자인)",
+      "schedule": "월 13:30~16:15",
+      "instructor": "정영민"
+    },
+    {
+      "code": "CSE4188_01",
+      "name": "암호학기초",
+      "schedule": "수-금 13:30~14:45",
+      "instructor": "김세준"
+    },
+    {
+      "code": "CSEG109_01",
+      "name": "생성형 AI 기반 오디오인식 및 합성/변환",
+      "schedule": "화-목 10:30~11:45",
+      "instructor": "김지환"
+    },
+    {
+      "code": "CSEG321_01",
+      "name": "인간언어기술개론",
+      "schedule": "월-수 16:30~17:45",
+      "instructor": "이화란"
+    },
+    {
+      "code": "CSEG414_01",
+      "name": "병렬분산컴퓨팅",
+      "schedule": "화-목 12:00~13:15",
+      "instructor": "박성용"
+    },
+    {
+      "code": "CSEG483_01",
+      "name": "기초 GPU 프로그래밍",
+      "schedule": "화-목 16:30~17:45",
+      "instructor": "임인성"
+    },
+    {
+      "code": "AIEG110_01",
+      "name": "생성형AI기술및응용",
+      "schedule": "화-목 09:00~10:15",
+      "instructor": "장두성"
+    },
+    {
+      "code": "AII2010_01",
+      "name": "인공지능 입문",
+      "schedule": "수-금 15:00~16:15",
+      "instructor": "장나은"
+    },
+    {
+      "code": "COR1010_01",
+      "name": "기초인공지능프로그래밍",
+      "schedule": "화-목 15:00~16:15",
+      "instructor": "최준석"
+    },
+    {
+      "code": "COR1010_02",
+      "name": "기초인공지능프로그래밍",
+      "schedule": "화-목 13:30~14:45",
+      "instructor": "조성인"
+    },
+    {
+      "code": "COR1010_03",
+      "name": "기초인공지능프로그래밍",
+      "schedule": "화-목 16:30~17:45",
+      "instructor": "신성복"
+    },
+    {
+      "code": "COR1010_04",
+      "name": "기초인공지능프로그래밍",
+      "schedule": "월-수 10:30~11:45",
+      "instructor": "이화란"
+    },
+    {
+      "code": "OTHER",
+      "name": "그 외 나머지 과목(어느것도 상관 없음)",
+      "schedule": "",
+      "instructor": ""
+    }
+  ]
+}

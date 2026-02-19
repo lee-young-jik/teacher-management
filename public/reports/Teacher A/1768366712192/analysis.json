@@ -1,0 +1,61 @@
+﻿{
+  "scores": {
+    "학생_참여도": 18,
+    "개념_설명": 16,
+    "피드백": 17,
+    "수업_체계성": 15,
+    "상호작용": 18
+  },
+  "우수점": [
+    "학생들의 오개념(예: 'more'가 나오면 무조건 덧셈을 해야 한다는 생각)을 정확히 짚어내고 논리적 상황 이해를 유도했습니다.",
+    "분수의 나눗셈과 곱셈의 관계를 시각적 모델(피자, 퀼트 등)과 실생활 문제를 통해 구체적으로 설명했습니다.",
+    "학생 한 명 한 명의 이름을 부르며 발언권을 고루 분배하고, 학생의 질문이나 기술적 문제(화면 공유 등)에 즉각적으로 대응했습니다."
+  ],
+  "우수점_en": [
+    "The teacher accurately identified and corrected student misconceptions, such as the tendency to simply add when seeing the word \"more,\" by encouraging logical situational analysis.",
+    "Concepts of fraction division and multiplication were explained clearly using visual models and real-life scenarios like pizza and quilts.",
+    "The teacher actively engaged all students by name, ensuring balanced participation and promptly addressing individual questions or technical issues."
+  ],
+  "개선점": [
+    "수업 중 기술적인 이슈(음소거 해제, 화면 공유 문제 등)로 인해 흐름이 다소 끊기는 지점이 있어, 온라인 수업 도구 활용에 대한 사전 안내가 더 필요해 보입니다.",
+    "분수 읽기 방식(예: 'three and two fifths')에 대해 학생들이 반복적인 실수를 보이므로, 수치 읽기 규칙에 대한 명시적인 집중 지도가 보완되면 좋겠습니다.",
+    "과제 공지 시(week 11, 12 등) 학생들의 부담감이 느껴지므로, 과제 부여의 이유와 목표를 조금 더 부드럽게 전달할 필요가 있습니다."
+  ],
+  "개선점_en": [
+    "Occasional technical issues like muting and screen-sharing disrupted the flow, suggesting a need for better pre-class instructions on using online tools.",
+    "Students repeatedly struggled with reading complex fractions aloud; explicit instruction on the correct terminology for reading numbers would be beneficial.",
+    "The announcement of \"double homework\" caused some student stress, so the rationale and objectives behind assignments could be communicated more empathetically."
+  ],
+  "highlights": [
+    {
+      "timestamp": "07:40",
+      "teacherText": "Okay, it's 10 divided by 1 third, which is. If it's divided by 1 third. How do we change this? 10?",
+      "studentText": "10 times 3... 30. 30 people were there.",
+      "reason": "분수의 나눗셈이 곱셈으로 역전되는 원리를 학생이 직접 계산하여 실제 사람 수(30명)라는 결과로 도출해내는 과정이 수학적 개념 이해를 잘 보여줍니다.",
+      "reason_en": "This interaction shows the student successfully converting fraction division into multiplication and connecting the mathematical result (30) to a real-world context (number of people).",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "12:37",
+      "teacherText": "One third. Michael, is it one third?",
+      "studentText": "Four. One. One third.",
+      "reason": "전체 퀼트에서 특정 조각이 차지하는 비율을 찾기 위해 교사가 질문을 던지고, 학생이 시각적 모델을 근거로 답을 찾아가는 상호작용이 우수합니다.",
+      "reason_en": "The teacher uses questioning to help the student identify parts of a whole based on a visual model, demonstrating effective scaffolding for proportional reasoning.",
+      "type": "적극참여"
+    },
+    {
+      "timestamp": "40:24",
+      "teacherText": "You just heard the word less and you just thought it's minus, right? You have to understand the situation.",
+      "studentText": "So that means 2 5/8 minus 1 (and 1/12).",
+      "reason": "키워드(more/less)에만 의존해 연산 기호를 선택하던 학생의 습관을 교정하고, 문장제 문제의 맥락을 파악하도록 유도한 결정적 피드백 지점입니다.",
+      "reason_en": "The teacher provides corrective feedback to shift the student's focus from keyword-based operations to contextual understanding of word problems.",
+      "type": "긍정피드백"
+    }
+  ],
+  "title": "final",
+  "teacherId": "Teacher A",
+  "uploadDate": "2026-01-14T04:59:55.413Z",
+  "filename": "Test_1.mp4",
+  "fileSize": 121980576,
+  "videoDuration": "00:48:04.04"
+}

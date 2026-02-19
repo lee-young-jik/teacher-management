@@ -74,8 +74,6 @@ export default function DebugProfilePage() {
     switch (role) {
       case 'admin':
         return '/admin-dashboard'
-      case 'principal':
-        return '/principal-dashboard'
       case 'teacher':
         return '/'
       default:
@@ -87,8 +85,6 @@ export default function DebugProfilePage() {
     switch (role) {
       case 'admin':
         return '관리자 - 시스템 전체 관리 권한'
-      case 'principal':
-        return '원장 - 학교 전체 관리 권한'
       case 'teacher':
         return '교사 - 개인 수업 분석 및 관리'
       default:
@@ -162,9 +158,7 @@ export default function DebugProfilePage() {
                     <Chip 
                       label={profileData?.profile?.role || 'N/A'} 
                       color={
-                        profileData?.profile?.role === 'admin' ? 'error' :
-                        profileData?.profile?.role === 'principal' ? 'warning' :
-                        'primary'
+                        profileData?.profile?.role === 'admin' ? 'error' : 'primary'
                       }
                     />
                     <Typography variant="body2" color="text.secondary">
@@ -268,12 +262,6 @@ export default function DebugProfilePage() {
               onClick={() => router.push('/')}
             >
               메인 페이지로 (선생님 대시보드)
-            </Button>
-            <Button 
-              variant="outlined" 
-              onClick={() => router.push('/principal-dashboard')}
-            >
-              원장 대시보드로
             </Button>
             <Button 
               variant="outlined" 

@@ -1,0 +1,22 @@
+# Python 관련
+venv/
+__pycache__/
+*.pyc
+teacher_management_python/
+
+# 큰 파일들 (총 949MB → 제외)
+public/uploads/
+public/diagram-*.png
+public/diagram-*.jpeg
+public/diagram-*.jpg
+sogang.jpg
+
+# 빌드 결과물
+.next/
+node_modules/
+
+# 기타
+.git/
+*.log
+.DS_Store
+scripts/*.js

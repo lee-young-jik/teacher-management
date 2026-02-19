@@ -1,0 +1,48 @@
+﻿{
+  "scores": {
+    "학생_참여도": 0,
+    "개념_설명": 6,
+    "피드백": 0,
+    "수업_체계성": 7,
+    "상호작용": 0
+  },
+  "우수점": [
+    "AI 관련 데이터를 실제 사례와 연결하여 설명을 시도함",
+    "데이터의 속성(예: customer profile, age, education 등)을 열거하여 구체적 예시를 제시함",
+    "AI API, 원본 데이터 등 실제 실습 맥락을 언급함"
+  ],
+  "개선점": [
+    "학생의 참여 유도 및 발화를 촉진하지 못해 쌍방향 수업이 전혀 이루어지지 않음",
+    "학생 답변이나 반응에 대한 피드백 과정이 없음",
+    "개념 설명 중 불분명한 부분이 많으며, 논리적 구조와 흐름이 다소 약함"
+  ],
+  "highlights": [
+    {
+      "timestamp": "00:33",
+      "teacherText": "There's AI ready data. Original data. Yeah. Generation. The customers, dear CSV five foreign. Campaign. Customers, Education, Customer id. Combined. Okay, so AI ready data. Make AI ready. Interaction.",
+      "studentText": "(발화 없음)",
+      "reason": "\"AI ready data\"와 관련된 개념을 실습 맥락에 맞게 설명하고자 한 점은 실제 데이터 처리의 실제 상황을 반영하고 있음",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "00:33",
+      "teacherText": "Open AI API. OpenAI is API key. Open API key. Text, Foreign. F a I s s inde. I mean. Research.",
+      "studentText": "(발화 없음)",
+      "reason": "외부 오픈 API의 활용 측면(예시: Open AI API)과 데이터의 구조를 혼합해 언급한 부분은 학생들이 실무 상황을 연상할 수 있게 하는 장점이 있음",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "00:33",
+      "teacherText": "Customer profile, age is 31. Single university degree, Single education. Campaign.",
+      "studentText": "(발화 없음)",
+      "reason": "실제 고객 프로필 데이터를 예시로 들며 구체적으로 개념을 전달하려는 노력이 보임",
+      "type": "개념이해"
+    }
+  ],
+  "title": "rag",
+  "teacherId": "선생님",
+  "uploadDate": "2026-01-12T05:21:11.504Z",
+  "filename": "GMT20251226-110031_Recording_1920x1080.mp4",
+  "fileSize": 119923647,
+  "videoDuration": "00:52:53.00"
+}

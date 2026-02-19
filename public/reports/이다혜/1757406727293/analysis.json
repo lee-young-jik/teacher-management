@@ -1,0 +1,62 @@
+﻿{
+  "scores": {
+    "학생_참여도": 18,
+    "개념_설명": 19,
+    "피드백": 18,
+    "수업_체계성": 17,
+    "상호작용": 18
+  },
+  "우수점": [
+    "학생들이 적극적으로 질문하고, 답변하며 문제 풀이 과정에 지속적으로 참여함",
+    "교사가 개념 설명(분수의 사칙연산, 시각적 모델, 단위 변환 등)을 반복적이고 다양한 방식(예시, 시각자료, 추론 유도)으로 명확하게 안내",
+    "학생의 오개념이나 실수에 대해 바로잡는 즉각적이고 긍정적인 피드백, 다양한 문제 접근법을 장려하는 분위기 형성"
+  ],
+  "개선점": [
+    "학생 답변이 잘못되었을 때 보다 체계적인 오답 피드백(정확한 오류 지적→왜 틀렸는지→수정 방향 안내)이 강화될 필요",
+    "문제 풀이 중 학생의 혼란이나 반복 질문에 대해 한 번 더 정돈해서 정리·마무리하는 과정이 있었으면 더욱 체계적일 듯",
+    "화면 공유, 자료 시청 등 기술적 이슈 및 소통 오류 상황에서 빠른 대응과 집중력 유발 장치가 추가 필요"
+  ],
+  "highlights": [
+    {
+      "timestamp": "13:24",
+      "teacherText": "“1 fourth, 1 fourth times 1 third. Thank you, Michael. Were you listening? Okay, so 1 fourth times 1 third. So that is. Good job. So we can use fractions and equations to get right the answer. So the. The answer is 1:12 of the killed pieces. Okay, that is the answer. But is there other ways we can solve this without using the equation like this?”",
+      "studentText": "“14 times 1 third.” / “Yes. 14 times 1 third.” / “It's 1 12, 1 12th.”",
+      "reason": "학생이 직접 식을 찾아내어 논리적으로 접근했을 때 교사가 즉각적으로 칭찬하고, 다른 풀이 방법(논리적 추론, 시각화)으로 확장 질문을 이어간 점이 교육적으로 의미 있음",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "31:05",
+      "teacherText": "“Okay. Why? Michael, why do you think she made this?”",
+      "studentText": "“To make it more easier.”",
+      "reason": "학생의 풀이 과정(분모 통일 과정)을 스스로 설명시켜 수학적 사고의 흐름과 이유를 이해하게끔 심층적으로 질문한 사례",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "43:06",
+      "teacherText": "“It's one and 13 over 24. Perfect. So can we simplify this? Can we simplify. So no is the answer. What is the unit? If no units then. Wrong.”",
+      "studentText": "“No, no.” / “Wait, wait. Pounds.”",
+      "reason": "학생이 문제를 풀었지만 단위를 잊은 상황에서 교사가 단위의 중요성을 재차 강조, 정답의 완성도를 높임. 논리적 사고→정확한 답 완성의 과정이 드러나는 발화",
+      "type": "긍정피드백"
+    },
+    {
+      "timestamp": "2:09",
+      "teacherText": "“This question is showing you dividing into thirds. Do you get it? This time we're not dividing in two thirds. We're dividing it by one third.”",
+      "studentText": "“Yeah.”, “One third.”",
+      "reason": "학생이 특정 개념(“나누기 분수”의 실제적 의미)에 혼동을 보였을 때, 교사가 집중적으로 핵심 포인트를 반복, 개념 전환을 유도",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "17:42",
+      "teacherText": "“Oh, very good. So, wait, I wrote in the wrong place, which. It says, which numbers should you divide to solve the problems? Right. So you first have to write four.”",
+      "studentText": "“20 bowls of soup.”",
+      "reason": "학생이 답을 맞힌 뒤 단위·문제 요구사항을 재확인하며, 단위 일치와 해석력을 강조하는 피드백",
+      "type": "긍정피드백"
+    }
+  ],
+  "title": "test업로드",
+  "teacherId": "이다혜",
+  "uploadDate": "2025-09-09T08:34:33.245Z",
+  "filename": "Test_1.mp4",
+  "fileSize": 121980576,
+  "videoDuration": "00:48:04.04"
+}

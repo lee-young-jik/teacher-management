@@ -7,17 +7,39 @@ import { exec } from 'child_process';
 import { promisify } from 'util';
 import { writeFile } from 'fs/promises';
 import { Readable } from 'stream';
+import { createClient } from '@supabase/supabase-js';
+import os from 'os';
+
+// Supabase 클라이언트 초기화
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 const execAsync = promisify(exec);
 
-// FFmpeg 경로 설정 (OS 감지)
-const FFMPEG_PATH = process.platform === 'win32' 
-  ? 'C:\\Program Files\\ffmpeg\\bin\\ffmpeg.exe'
-  : 'ffmpeg'; // macOS/Linux는 PATH에서 찾음
+// FFmpeg 경로 설정 - Vercel/로컬 환경 모두 지원
+let FFMPEG_PATH = 'ffmpeg';
+try {
+  // @ffmpeg-installer/ffmpeg가 설치되어 있으면 해당 경로 사용
+  const ffmpegInstaller = require('@ffmpeg-installer/ffmpeg');
+  FFMPEG_PATH = ffmpegInstaller.path;
+  console.log('📦 FFmpeg 경로:', FFMPEG_PATH);
+} catch (e) {
+  // 설치되어 있지 않으면 시스템 FFmpeg 사용
+  FFMPEG_PATH = process.platform === 'win32' 
+    ? 'C:\\Program Files\\ffmpeg\\bin\\ffmpeg.exe'
+    : 'ffmpeg';
+  console.log('🔧 시스템 FFmpeg 사용:', FFMPEG_PATH);
+}
 
-// OpenAI 클라이언트 초기화
+// Vercel 환경 감지 - /tmp 사용 여부 결정
+const IS_VERCEL = process.env.VERCEL === '1';
+const TEMP_DIR = IS_VERCEL ? '/tmp' : os.tmpdir();
+
+// OpenRouter 클라이언트 초기화
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENROUTER_API_KEY || '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',
+  baseURL: 'https://openrouter.ai/api/v1'
 });
 
 // AssemblyAI 클라이언트 초기화
@@ -39,12 +61,15 @@ const statusEmitter = new Map<string, (data: string) => void>();
 interface AnalysisResult {
   scores: Record<string, number>;
   우수점: string[];
+  우수점_en: string[];
   개선점: string[];
+  개선점_en: string[];
   highlights: {
     timestamp: string;
     teacherText: string;
     studentText: string;
     reason: string;
+    reason_en: string;
     type: '개념이해' | '적극참여' | '긍정피드백';
   }[];
 }
@@ -53,7 +78,9 @@ interface AnalysisResult {
 function parseAnalysisResult(text: string): AnalysisResult {
   const scores: Record<string, number> = {};
   const 우수점: string[] = [];
+  const 우수점_en: string[] = [];
   const 개선점: string[] = [];
+  const 개선점_en: string[] = [];
   const highlights: AnalysisResult['highlights'] = [];
 
   // 점수 파싱
@@ -84,37 +111,63 @@ function parseAnalysisResult(text: string): AnalysisResult {
 
   // 우수점 파싱
   const 우수점Start = text.indexOf('우수점:');
-  const 우수점End = text.indexOf('개선점:');
-  if (우수점Start !== -1 && 우수점End !== -1) {
-    const 우수점Text = text.slice(우수점Start, 우수점End);
+  const 우수점EnStart = text.indexOf('우수점(영어):');
+  if (우수점Start !== -1 && 우수점EnStart !== -1) {
+    const 우수점Text = text.slice(우수점Start, 우수점EnStart);
     const 우수점Lines = 우수점Text.split('\n').slice(1);
     우수점Lines.forEach(line => {
       const point = line.replace(/^[- \d.]+/, '').trim();
-      if (point && !point.includes('점:')) {
+      if (point && !point.includes('점:') && !point.includes('영어')) {
         우수점.push(point);
       }
     });
   }
 
-  // 개선점 파싱
+  // 우수점(영어) 파싱
   const 개선점Start = text.indexOf('개선점:');
-  const 하이라이트Start = text.indexOf('하이라이트:');
-  if (개선점Start !== -1) {
-    const 개선점End = 하이라이트Start !== -1 ? 하이라이트Start : text.length;
-    const 개선점Text = text.slice(개선점Start, 개선점End);
+  if (우수점EnStart !== -1 && 개선점Start !== -1) {
+    const 우수점EnText = text.slice(우수점EnStart, 개선점Start);
+    const 우수점EnLines = 우수점EnText.split('\n').slice(1);
+    우수점EnLines.forEach(line => {
+      const point = line.replace(/^[- \d.]+/, '').trim();
+      if (point && !point.includes('점:') && !point.includes('영어')) {
+        우수점_en.push(point);
+      }
+    });
+  }
+
+  // 개선점 파싱
+  const 개선점EnStart = text.indexOf('개선점(영어):');
+  if (개선점Start !== -1 && 개선점EnStart !== -1) {
+    const 개선점Text = text.slice(개선점Start, 개선점EnStart);
     const 개선점Lines = 개선점Text.split('\n').slice(1);
     개선점Lines.forEach(line => {
+      const point = line.replace(/^[- \d.]+/, '').trim();
+      if (point && !point.includes('점:') && !point.includes('영어')) {
+        개선점.push(point);
+      }
+    });
+  }
+
+  // 개선점(영어) 파싱
+  const 하이라이트Start = text.indexOf('하이라이트:');
+  if (개선점EnStart !== -1) {
+    const 개선점EnEnd = 하이라이트Start !== -1 ? 하이라이트Start : text.length;
+    const 개선점EnText = text.slice(개선점EnStart, 개선점EnEnd);
+    const 개선점EnLines = 개선점EnText.split('\n').slice(1);
+    개선점EnLines.forEach(line => {
       const point = line.replace(/^[- \d.]+/, '').trim();
       // 하이라이트 관련 텍스트나 빈 줄은 제외
       if (point && 
           !point.includes('점:') && 
+          !point.includes('영어') &&
           !point.includes('하이라이트') && 
           !point.startsWith('시간:') &&
           !point.startsWith('교사:') &&
           !point.startsWith('학생:') &&
           !point.startsWith('이유:') &&
           !point.startsWith('유형:')) {
-        개선점.push(point);
+        개선점_en.push(point);
       }
     });
   }
@@ -140,6 +193,8 @@ function parseAnalysisResult(text: string): AnalysisResult {
         currentHighlight.teacherText = point.replace('교사:', '').trim().replace(/^"/, '').replace(/"$/, '');
       } else if (point.startsWith('학생:')) {
         currentHighlight.studentText = point.replace('학생:', '').trim().replace(/^"/, '').replace(/"$/, '');
+      } else if (point.startsWith('이유(영어):')) {
+        currentHighlight.reason_en = point.replace('이유(영어):', '').trim();
       } else if (point.startsWith('이유:')) {
         currentHighlight.reason = point.replace('이유:', '').trim();
       } else if (point.startsWith('유형:')) {
@@ -183,6 +238,8 @@ function parseAnalysisResult(text: string): AnalysisResult {
         currentHighlight.teacherText = trimmedLine.replace('교사:', '').trim();
       } else if (trimmedLine.startsWith('학생:')) {
         currentHighlight.studentText = trimmedLine.replace('학생:', '').trim();
+      } else if (trimmedLine.startsWith('이유(영어):')) {
+        currentHighlight.reason_en = trimmedLine.replace('이유(영어):', '').trim();
       } else if (trimmedLine.startsWith('이유:')) {
         currentHighlight.reason = trimmedLine.replace('이유:', '').trim();
       } else if (trimmedLine.startsWith('유형:')) {
@@ -198,7 +255,7 @@ function parseAnalysisResult(text: string): AnalysisResult {
     }
   }
 
-  return { scores, 우수점, 개선점, highlights };
+  return { scores, 우수점, 우수점_en, 개선점, 개선점_en, highlights };
 }
 
 export async function POST(req: NextRequest) {
@@ -209,13 +266,15 @@ export async function POST(req: NextRequest) {
     const video = formData.get('video') as File;
     const teacherId = formData.get('teacherId') as string;
     const title = formData.get('title') as string;
+    const lessonDate = formData.get('lessonDate') as string; // 수업 날짜
 
     console.log('📋 받은 데이터:', {
       videoName: video?.name,
       videoSize: video?.size ? `${(video.size / 1024 / 1024).toFixed(2)}MB` : 'unknown',
       videoType: video?.type,
       teacherId,
-      title
+      title,
+      lessonDate
     });
 
     if (!video || !teacherId) {
@@ -251,16 +310,14 @@ export async function POST(req: NextRequest) {
     // reportId 생성
     const reportId = Date.now().toString();
     console.log('생성된 reportId:', reportId);  // reportId 로깅
+    console.log('🌍 환경:', IS_VERCEL ? 'Vercel' : 'Local');
     
-    // 선생님별 디렉토리 생성 (teacherId를 선생님 이름으로 사용)
-    const reportDir = path.join(
-      process.cwd(),
-      'public',
-      'reports',
-      teacherId, // 이미 선생님 이름이 전달됨
-      reportId
-    );
+    // Vercel에서는 /tmp 사용, 로컬에서는 public/reports 사용
+    const reportDir = IS_VERCEL
+      ? path.join(TEMP_DIR, 'reports', teacherId, reportId)
+      : path.join(process.cwd(), 'public', 'reports', teacherId, reportId);
 
+    console.log('📁 리포트 디렉토리:', reportDir);
     await fs.mkdir(reportDir, { recursive: true });
 
     try {
@@ -389,9 +446,9 @@ export async function POST(req: NextRequest) {
       await fs.writeFile(transcriptPath, JSON.stringify(transcript, null, 2));
       statusEmitter.get(reportId)?.('{"status":"processing","progress":80,"step":"트랜스크립션 완료 (화자 구분 최적화됨)"}');
 
-          // GPT-4.1-2025-04-14로 대화 분석 및 점수 산출 (한국어 교육 맥락 최적화)
+          // Google Gemini로 대화 분석 및 점수 산출 (한국어 교육 맥락 최적화)
     const analysisResponse = await openai.chat.completions.create({
-      model: "gpt-4.1-2025-04-14",
+      model: "google/gemini-3-flash-preview",
         messages: [
           {
             role: "system",
@@ -412,22 +469,34 @@ export async function POST(req: NextRequest) {
                         - [구체적인 우수한 점 2]
                         - [구체적인 우수한 점 3]
 
+                        우수점(영어):
+                        - [Specific strength 1 in English]
+                        - [Specific strength 2 in English]
+                        - [Specific strength 3 in English]
+
                         개선점:
                         - [구체적인 개선할 점 1]
                         - [구체적인 개선할 점 2]
                         - [구체적인 개선할 점 3]
+
+                        개선점(영어):
+                        - [Specific improvement 1 in English]
+                        - [Specific improvement 2 in English]
+                        - [Specific improvement 3 in English]
 
                         하이라이트:
                         시간: [MM:SS 형식]
                         교사: [교사의 실제 발화 내용]
                         학생: [학생의 실제 발화 내용]
                         이유: [이 상호작용이 교육적으로 의미있는 구체적 이유]
+                        이유(영어): [Educational significance in English]
                         유형: [개념이해/적극참여/긍정피드백 중 하나]
                         
                         시간: [MM:SS 형식]
                         교사: [교사의 실제 발화 내용]
                         학생: [학생의 실제 발화 내용]
                         이유: [이 상호작용이 교육적으로 의미있는 구체적 이유]
+                        이유(영어): [Educational significance in English]
                         유형: [개념이해/적극참여/긍정피드백 중 하나]
                         
                         IMPORTANT: 하이라이트 정보는 반드시 '하이라이트:' 섹션 아래에만 작성하고, 개선점 섹션에는 포함하지 마세요.
@@ -528,6 +597,66 @@ ${transcript.utterances?.slice(0, 20).map((msg, idx) =>
         
         await fs.writeFile(analysisPath, contentBuffer);
         console.log('분석 결과 저장 완료. reportId:', reportId);  // reportId 로깅
+
+        // Supabase에 보고서 저장
+        try {
+          const scores = analysisResult.scores || {};
+          
+          // 수업 날짜 처리 (선택한 날짜 또는 현재 날짜)
+          const lessonDateTime = lessonDate 
+            ? new Date(lessonDate + 'T12:00:00').toISOString() 
+            : new Date().toISOString();
+          
+          const reportData = {
+            report_id: reportId,
+            teacher_id: null, // 나중에 프로필 연결 시 추가
+            teacher_name: teacherId,
+            title: title || video.name.replace(/\.[^/.]+$/, ""),
+            filename: video.name,
+            file_size: video.size,
+            video_duration: videoDuration,
+            score_student_participation: scores['학생_참여도'] || scores['학생_참여'] || 0,
+            score_concept_explanation: scores['개념_설명'] || 0,
+            score_feedback: scores['피드백'] || 0,
+            score_structure: scores['수업_체계성'] || scores['체계성'] || 0,
+            score_interaction: scores['상호작용'] || 0,
+            total_score: (
+              (scores['학생_참여도'] || scores['학생_참여'] || 0) +
+              (scores['개념_설명'] || 0) +
+              (scores['피드백'] || 0) +
+              (scores['수업_체계성'] || scores['체계성'] || 0) +
+              (scores['상호작용'] || 0)
+            ),
+            strengths: analysisResult.우수점 || [],
+            strengths_en: analysisResult.우수점_en || [],
+            improvements: analysisResult.개선점 || [],
+            improvements_en: analysisResult.개선점_en || [],
+            highlights: analysisResult.highlights || [],
+            highlights_en: analysisResult.highlights?.map(h => ({
+              timestamp: h.timestamp,
+              teacherText: h.teacherText,
+              studentText: h.studentText,
+              reason: h.reason_en || h.reason,
+              type: h.type
+            })) || [],
+            // transcript: transcript || {}, // TODO: DB에 컬럼 추가 후 활성화
+            created_at: lessonDateTime // 사용자가 선택한 수업 날짜
+          };
+
+          const { error: supabaseError } = await supabase
+            .from('reports')
+            .upsert(reportData, { onConflict: 'report_id' });
+
+          if (supabaseError) {
+            console.error('Supabase 저장 오류:', supabaseError);
+            // Supabase 저장 실패해도 로컬 파일은 저장됐으므로 계속 진행
+          } else {
+            console.log('Supabase에 보고서 저장 완료:', reportId);
+          }
+        } catch (supabaseErr) {
+          console.error('Supabase 저장 중 예외 발생:', supabaseErr);
+          // Supabase 저장 실패해도 로컬 파일은 저장됐으므로 계속 진행
+        }
       }
 
       // 임시 파일 정리
@@ -605,9 +734,7 @@ export async function GET(req: NextRequest) {
   });
 }
 
-export const config = {
-  api: {
-    bodyParser: false,
-    responseLimit: false
-  }
-}; 
+// App Router에서 런타임 및 최대 실행 시간 설정
+export const runtime = 'nodejs';
+export const maxDuration = 300; // 5분 (Vercel Pro 기준)
+export const dynamic = 'force-dynamic'; 

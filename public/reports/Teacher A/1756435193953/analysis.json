@@ -1,0 +1,48 @@
+﻿{
+  "scores": {
+    "학생_참여도": 11,
+    "개념_설명": 16,
+    "피드백": 14,
+    "수업_체계성": 15,
+    "상호작용": 13
+  },
+  "우수점": [
+    "교사가 학생들에게 질문을 지속적으로 던지며 다양한 단어와 개념(알파벳, 사물 이름, 숫자 등)을 상호작용적으로 탐색함",
+    "설명 중간마다 학생 생각을 묻고, 학생들의 답변에 대해 긍정적 반응(“Good job”, “I love it”, “Thank you”) 등으로 즉각적 피드백 제공",
+    "도구(사물, 그림, 키보드 등)를 활용해 개념을 실제 맥락에 연결함으로써 초등 저학년 수준에서 흥미 유지"
+  ],
+  "개선점": [
+    "학생들의 실제 발화가 명확히 드러나는 부분이 부족하여 학생의 자발적 언어 산출 기회가 제한됨",
+    "설명과 활동 지시가 교사 중심으로 진행되어 학생이 주도적으로 문제를 해결하거나 질문·의견을 낼 기회가 더 많으면 좋음",
+    "다양한 학생 간 상호작용(학생 간 풀이 공유, 토의 등)이 거의 이루어지지 않아 학생 상호 학습 기회 부족"
+  ],
+  "highlights": [
+    {
+      "timestamp": "01:30",
+      "teacherText": "\"Can you think of another word that starts with A? Anything? Elephant. Cat. Hand. What word starts with A? Yes. Angry. Angry. Good job. And then what else? Alligator. Acorn. Yes. Animals. What about you, Jay? Ant.\"",
+      "studentText": "\"Angry. Alligator. Acorn. Ant.\"",
+      "reason": "교사가 반복적으로 질문을 하며 다양한 학생들의 참여를 유도하고, 학생 스스로 단어를 생각하게 함으로써 창의적 언어 사용 기회 제공",
+      "type": "적극참여"
+    },
+    {
+      "timestamp": "04:50",
+      "teacherText": "“Can I say three apple. No. Why not? There's more than one, so we should. Yes, Louie.”",
+      "studentText": "“Oh, it's three apples.”",
+      "reason": "교사가 문법적 오류를 의도적으로 유도하고, 학생의 스스로 올바른 복수형 표현을 도출하는 상황 제공.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "09:30",
+      "teacherText": "“You can draw or you can write. You will create your own code. For example, I want to tell you a secret. What secret do you think this is?... How many babies do you see? Three. So what should I write? 3B.”",
+      "studentText": "“3B.”",
+      "reason": "학생이 자신만의 코드를 만들어보고, 창의력과 문제해결력을 실생활 맥락과 연결하여 경험할 수 있도록 지도",
+      "type": "긍정피드백"
+    }
+  ],
+  "title": "강의2",
+  "teacherId": "이영직",
+  "uploadDate": "2025-08-29T02:40:42.443Z",
+  "filename": "KakaoTalk_Video_2025-08-29-11-38-34.mp4",
+  "fileSize": 215754122,
+  "videoDuration": "00:13:13.80"
+}

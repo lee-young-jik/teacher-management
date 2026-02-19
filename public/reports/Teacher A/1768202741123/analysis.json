@@ -1,0 +1,62 @@
+﻿{
+  "scores": {
+    "학생_참여도": 17,
+    "개념_설명": 18,
+    "피드백": 16,
+    "수업_체계성": 19,
+    "상호작용": 18
+  },
+  "우수점": [
+    "학생들이 정답을 추론하는 과정에서 사고를 다양하게 드러내며 활발하게 참여함(예: 여러 차례 학생이 직접 문제를 읽거나 식을 세움).",
+    "교사가 문제의 맥락 변형, 실생활 예시, 시각화(모델 그리기 등) 등 다양한 설명 방식으로 개념 이해를 돕고 명확하게 안내함.",
+    "학생의 오류나 오개념, 질문, 실수에 대해 세밀하게 피드백을 주고 즉각적으로 교정 및 추가 설명을 진행함."
+  ],
+  "개선점": [
+    "일부 학생 발화에서 “잘 모르겠다”, “헷갈린다” 등 난도가 다소 높거나 설명이 부족하다고 느낄 수 있는 부분이 있어 단계별 설명이나 중간 점검이 더 필요함.",
+    "학생 간 상호 질문/설명이 주로 교사-학생 중심이라, 동료 간 설명 및 의견 교환 기회를 더 자주 마련하면 적극적 협력 학습이 촉진될 수 있음.",
+    "후반부로 갈수록 일부 학생이 피로감을 호소(“힘들다”, “지쳤다”), 수업의 동기 부여나 리듬 조절(미션, 간단한 퀴즈, 짧은 휴식 등)로 집중 유지를 유도할 필요가 보임."
+  ],
+  "highlights": [
+    {
+      "timestamp": "12:24",
+      "teacherText": "No, I. I will ask you again. So what fraction of the whole kilt is a square? This square is what fraction of the whole one?",
+      "studentText": "One third.",
+      "reason": "분수의 전체-부분 개념을 학생 스스로 도출하게 유도하며, 수 묻기-답하기-확인 구조로 정확한 개념 확인이 이루어짐.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "29:55",
+      "teacherText": "Multiply them. Subtract them or what? What are you going to do with these numbers?",
+      "studentText": "Add. You will add them, right? Because you're getting the total of these two, right?",
+      "reason": "복합적인 수치(분수, 대분수)를 이용해 문제의 연산 종류(덧셈, 곱셈 등)를 논리적으로 판별하게 질문, 학생이 직접 답을 도출하도록 사고를 촉진함.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "33:06",
+      "teacherText": "Because 29 is a prime number. Well done. So what is the answer. 5 and 9.",
+      "studentText": "What is the unit? No. Tons of cons, please.",
+      "reason": "단순 계산에 그치지 않고, 단위 확인을 통해 수학적 완결성을 확인함. “구체적 설명→실수 점검→개념 마무리” 구조가 잘 드러남.",
+      "type": "긍정피드백"
+    },
+    {
+      "timestamp": "40:18",
+      "teacherText": "So that means 2 fifth. 8 minus 1.",
+      "studentText": "Yes.",
+      "reason": "구체적 예시(쿠키, 피자 등)와 유사문장을 활용해 말장난에 혼동되는 연산(덧셈/뺄셈 구분) 개념 혼동을 학생 스스로 깨닫도록 반복 질문하고, 올바른 답을 검증함.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "46:54",
+      "teacherText": "Can. Anyone? Okay. Abigail. Michael, do you know how to write this in decimals?",
+      "studentText": "1.8, 0.82? 1.",
+      "reason": "수학적 개념의 응용(분수→소수 변환)에서 다양한 답변을 시도하게 하여, 오류를 긍정적으로 받아들이고 올바른 개념으로 유도함.",
+      "type": "긍정피드백"
+    }
+  ],
+  "title": "Test_1",
+  "teacherId": "이영직",
+  "uploadDate": "2026-01-12T07:27:22.308Z",
+  "filename": "Test_1.mp4",
+  "fileSize": 121980576,
+  "videoDuration": "00:48:04.04"
+}

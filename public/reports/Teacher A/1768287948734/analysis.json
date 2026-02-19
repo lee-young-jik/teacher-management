@@ -1,0 +1,55 @@
+﻿{
+  "scores": {
+    "학생_참여도": 17,
+    "개념_설명": 19,
+    "피드백": 18,
+    "수업_체계성": 18,
+    "상호작용": 18
+  },
+  "우수점": [
+    "학생들의 발화와 질문이 자주 나타나며, 교사는 끊임없이 학생들에게 문제 풀이 과정을 설명하게 하거나 의견을 요구함(예: \"Can you please tell me the equation?\", \"What about you, Michael, what do you think?\").",
+    "교사가 개념 설명 시 맥락적 사례(피자, 유리잔, 사각형 등)와 시각 자료(모델, 그림 등)를 활용하여 학생의 이해를 돕고, 문제를 실제 생활과 연결함.",
+    "학생 오답이나 어려움에 대해 즉각적으로 피드백을 주고, 서로 다른 풀이 방법이나 오해를 명확히 짚어주며, 잘못된 부분을 추가 설명해줌(예: 단위, 분수 덧셈 방법 등)."
+  ],
+  "개선점": [
+    "일부 구간에서 교사 발화량이 학생에 비해 다소 높게 유지되어, 학생 간 토의나 자율적 탐색이 더 이루어질 여지가 있음.",
+    "학생이 풀이 오류를 냈을 때 개별 학생의 생각이나 오해 과정을 더 상세하게 질문하며 사고 과정을 이끌어내는 대화가 보완될 수 있음.",
+    "사소한 기술적 문제(화면공유, 음소거 등)에 대해 학생의 주의가 분산되거나 흐름이 끊어지는 부분에서 학습 집중도를 높일 수 있는 구조적 안내가 필요함."
+  ],
+  "highlights": [
+    {
+      "timestamp": "07:40",
+      "teacherText": "\"Okay, it's 10 divided by 1 third, which is. If it's divided by 1 third. How do we change this? 10?\"",
+      "studentText": "\"10 over 3.\" \"10 times 1 third.\" \"10 times 3.\" \"30. 30 people could eat the pizza. Right?\"",
+      "reason": "분수 나눗셈의 개념을 학생들이 실제 사례(피자)로 접목하며, 여러 학생의 다양한 풀이 시도를 끌어냄. 학생 스스로 개념적 연결을 이루는 과정이 교육적으로 매우 의미 있음.",
+      "type": "개념이해"
+    },
+    {
+      "timestamp": "13:20",
+      "teacherText": "\"Not me. Did you say not me?\"",
+      "studentText": "\"1 fourth, 1 fourth times 1 third. Thank you, Michael. Were you listening?\"",
+      "reason": "교사가 학생들에게 개념 질문을 던지고, 소극적 반응에도 한 번 더 기회를 주며 용기 있게 답한 학생을 인정함. 어려운 분수 곱셈 문제에서 학생이 적극적으로 개념을 발표하게 하여 긍정적 피드백을 제공함.",
+      "type": "긍정피드백"
+    },
+    {
+      "timestamp": "30:03",
+      "teacherText": "\"Add. You will add them, right? Because you're getting the total of these two, right? Are you multiplying something? No. No. So you should add them. It's three and two fifths plus two and one twelve. Okay, Abby, you got the answer. How did you solve this? Oh, can you please explain using words?\"",
+      "studentText": "\"2 and 1/12 plus 3 and 2/5 equals 2 and 56/60 plus 3 and 24/60, which equals 5 and 29/60.\"",
+      "reason": "학생이 덧셈의 원리와 분모 통일 등 수학적 개념에 대해 스스로 설명하고, 교사는 이를 토대로 상세히 추가 설명하며 논리적 사고를 강화함.",
+      "type": "적극참여"
+    },
+    {
+      "timestamp": "40:06",
+      "teacherText": "\"You just heard the word less and you just thought it's minus, right? Yeah, it's actually...\"",
+      "studentText": "\"Oh, Jasmine, Right.\"",
+      "reason": "언어적 의미(‘less’, ‘more’)와 수학적 연산 방법 사이의 오해를 교사가 실제 예시를 들어 풀어내며, 학생의 직관적 오해를 논리적으로 점검하는 과정이 매우 효과적임.",
+      "type": "개념이해"
+    }
+  ],
+  "title": "테스트영상",
+  "teacherId": "이영직",
+  "uploadDate": "2026-01-13T07:07:46.757Z",
+  "filename": "Test_1.mp4",
+  "fileSize": 121980576,
+  "videoDuration": "00:48:04.04"
+}

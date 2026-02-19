@@ -4,6 +4,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import { AuthProvider } from "../../contexts/AuthContext";
 import CustomThemeProvider from "../../components/providers/ThemeProvider";
+import { LanguageProvider } from "../../contexts/LanguageContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,9 +37,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${sogang.variable} font-sogang antialiased`}
       >
         <CustomThemeProvider>
-          <AuthProvider>
-            {children}
-          </AuthProvider>
+          <LanguageProvider>
+            <AuthProvider>
+              {children}
+            </AuthProvider>
+          </LanguageProvider>
         </CustomThemeProvider>
       </body>
     </html>

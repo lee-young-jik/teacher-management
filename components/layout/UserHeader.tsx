@@ -9,18 +9,23 @@ import {
   Avatar,
   Menu,
   MenuItem,
-  IconButton
+  IconButton,
+  ToggleButtonGroup,
+  ToggleButton
 } from '@mui/material'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import PersonIcon from '@mui/icons-material/Person'
 import LogoutIcon from '@mui/icons-material/Logout'
 import SchoolIcon from '@mui/icons-material/School'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import LanguageIcon from '@mui/icons-material/Language'
 
 export default function UserHeader() {
   const { user, profile, signOut, isTeacher, isPrincipal, isAdmin, loading } = useAuth()
+  const { language, setLanguage } = useLanguage()
   const router = useRouter()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [isClient, setIsClient] = useState(false)
@@ -93,6 +98,37 @@ export default function UserHeader() {
         border: '1px solid rgba(0,0,0,0.05)'
       }}
     >
+      {/* 언어 선택 */}
+      <ToggleButtonGroup
+        value={language}
+        exclusive
+        onChange={(e, newLanguage) => {
+          if (newLanguage !== null) {
+            setLanguage(newLanguage);
+          }
+        }}
+        size="small"
+        sx={{
+          '& .MuiToggleButton-root': {
+            px: 1.5,
+            py: 0.5,
+            fontSize: '0.75rem',
+            fontWeight: 600,
+            border: '1px solid rgba(0,0,0,0.12)',
+            '&.Mui-selected': {
+              bgcolor: '#667eea',
+              color: 'white',
+              '&:hover': {
+                bgcolor: '#5a6fd6',
+              }
+            }
+          }
+        }}
+      >
+        <ToggleButton value="ko">한글</ToggleButton>
+        <ToggleButton value="en">English</ToggleButton>
+      </ToggleButtonGroup>
+
       {/* 사용자 정보 */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         <Avatar sx={{ width: 32, height: 32, bgcolor: roleInfo.color + '.main' }}>
