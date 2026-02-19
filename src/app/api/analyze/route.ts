@@ -515,26 +515,19 @@ ${transcript.utterances?.slice(0, 20).map((msg, idx) =>
       if (analysisResponse.choices[0].message?.content) {
         const analysisResult = parseAnalysisResult(analysisResponse.choices[0].message.content);
         
-        // FFmpeg를 사용해서 비디오 재생 시간 추출
+        // 트랜스크립션 데이터에서 비디오 재생 시간 추정
         let videoDuration = null;
         try {
-          const { stdout } = await execAsync(`${FFMPEG_PATH} -i "${tempVideoPath}" -f null - 2>&1 | grep "Duration" | head -n 1 | sed 's/.*Duration: \\([^,]*\\).*/\\1/'`);
-          const durationMatch = stdout.trim();
-          if (durationMatch && durationMatch.includes(':')) {
-            videoDuration = durationMatch;
-            console.log(`비디오 재생 시간: ${videoDuration}`);
-          }
-        } catch (error) {
-          console.warn('비디오 재생 시간 추출 실패:', error);
-          // 트랜스크립션 데이터에서 총 길이 추정
           if (transcript.utterances && transcript.utterances.length > 0) {
             const lastUtterance = transcript.utterances[transcript.utterances.length - 1];
             const totalSeconds = Math.ceil(lastUtterance.end / 1000);
             const minutes = Math.floor(totalSeconds / 60);
             const seconds = totalSeconds % 60;
             videoDuration = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-            console.log(`트랜스크립션에서 추정한 재생 시간: ${videoDuration}`);
+            console.log(`📏 트랜스크립션에서 추정한 재생 시간: ${videoDuration}`);
           }
+        } catch (error) {
+          console.warn('비디오 재생 시간 추출 실패:', error);
         }
         
         // 제목과 메타데이터 추가
